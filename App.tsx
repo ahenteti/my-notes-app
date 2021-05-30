@@ -1,21 +1,68 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
+import AddMemoryButton from './src/components/AddMemoryButton';
+import Header from './src/components/Header';
+import Memories from './src/components/Memories';
+
+const DATA = [
+  {
+    id: '1',
+    label: 'Rzfal',
+    value: 'EW1gd1%&Vo7a5<f628',
+  },
+  {
+    id: '2',
+    label: 'WlfEC',
+    value: '7mBde7K4(55@5NnRgB4#-',
+  },
+  {
+    id: '3',
+    label: 'WBF',
+    value: 'Z$r5)+@6P34kZDd65I5ED',
+  },
+  {
+    id: '10',
+    label: 'Rzfal',
+    value: 'EW1gd1%&Vo7a5<f628',
+  },
+  {
+    id: '20',
+    label: 'WlfEC',
+    value: '7mBde7K4(55@5NnRgB4#-',
+  },
+  {
+    id: '30',
+    label: 'WBF',
+    value: 'Z$r5)+@6P34kZDd65I5ED',
+  },
+  {
+    id: '100',
+    label: 'Rzfal',
+    value: 'EW1gd1%&Vo7a5<f628',
+  },
+  {
+    id: '200',
+    label: 'WlfEC',
+    value: '7mBde7K4(55@5NnRgB4#-',
+  },
+  {
+    id: '300',
+    label: 'WBF',
+    value: 'Z$r5)+@6P34kZDd65I5ED',
+  },
+];
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style='auto' />
+      <StatusBar barStyle='default' />
+      <Header></Header>
+      <Memories memories={DATA}></Memories>
+      <AddMemoryButton></AddMemoryButton>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  container: {},
 });
