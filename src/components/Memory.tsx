@@ -1,5 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { ThemeEnum } from '../services/ThemeEnum';
+import { Color } from '../services/Color';
+import { useTheme } from '../services/ThemeContext';
 
 export interface MemoryProps {
   id: string;
@@ -8,6 +11,8 @@ export interface MemoryProps {
 }
 
 export default function Memory(props: { memory: MemoryProps }) {
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{props.memory.label}</Text>
@@ -18,24 +23,30 @@ export default function Memory(props: { memory: MemoryProps }) {
 
 export const renderMemory = ({ item }: { item: MemoryProps }) => <Memory memory={item}></Memory>;
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFF',
-    padding: 15,
-    margin: 10,
-    marginBottom: 2,
-    borderRadius: 3,
-  },
-  label: {
-    color: '#444',
-    fontSize: 18,
-    fontFamily: 'Roboto',
-    fontWeight: 'bold',
-    paddingBottom: 4,
-  },
-  value: {
-    color: '#777',
-    fontSize: 13,
-    fontFamily: 'Roboto',
-  },
-});
+const getStyles = (theme: ThemeEnum) => {
+  return StyleSheet.create({
+    container: {
+      backgroundColor: BACKGROUND_COLOR.get(theme),
+      padding: 15,
+      margin: 10,
+      marginBottom: 2,
+      borderRadius: 3,
+    },
+    label: {
+      color: LABEL_COLOR.get(theme),
+      fontSize: 18,
+      fontFamily: 'Roboto',
+      fontWeight: 'bold',
+      paddingBottom: 4,
+    },
+    value: {
+      color: VALUE_COLOR.get(theme),
+      fontSize: 13,
+      fontFamily: 'Roboto',
+    },
+  });
+};
+
+const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
+const LABEL_COLOR = new Color('#444', '#EEE');
+const VALUE_COLOR = new Color('#777', '#CCC');

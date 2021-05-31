@@ -1,8 +1,11 @@
-import React from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { StatusBar, View } from 'react-native';
 import AddMemoryButton from './src/components/AddMemoryButton';
 import Header from './src/components/Header';
 import Memories from './src/components/Memories';
+import { ThemeContext } from './src/services/ThemeContext';
+import { ThemeEnum } from './src/services/ThemeEnum';
+import { ThemeStorage } from './src/services/ThemeStorage';
 
 const DATA = [
   {
@@ -53,16 +56,27 @@ const DATA = [
 ];
 
 export default function App() {
+  const { themeStorage } = App.dependencies;
+  const [theme, setTheme] = React.useState(ThemeEnum.Light);
+
+  useEffect(setThemeFromLocalStorage, []);
+
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle='default' />
-      <Header></Header>
-      <Memories memories={DATA}></Memories>
-      <AddMemoryButton></AddMemoryButton>
-    </View>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <View>
+        <StatusBar barStyle='default' />
+        <Header></Header>
+        <Memories memories={DATA}></Memories>
+        <AddMemoryButton></AddMemoryButton>
+      </View>
+    </ThemeContext.Provider>
   );
+
+  function setThemeFromLocalStorage() {
+    themeStorage.isDark().then((isDark) => setTheme(isDark ? ThemeEnum.Dark : ThemeEnum.Light));
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {},
-});
+App.dependencies = {
+  themeStorage: ThemeStorage.getInstance(),
+};
