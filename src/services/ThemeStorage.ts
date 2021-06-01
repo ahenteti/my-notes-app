@@ -14,7 +14,7 @@ export class ThemeStorage {
     return this.storage.get('THEME_STORAGE_KEY').then((res) => /dark/i.test(res + ''));
   }
 
-  async updateTheme(previousTheme: ThemeEnum): Promise<void> {
+  async toggleTheme(previousTheme: ThemeEnum): Promise<void> {
     const newTheme = previousTheme == ThemeEnum.Dark ? 'light' : 'dark';
     return this.storage.set('THEME_STORAGE_KEY', newTheme);
   }

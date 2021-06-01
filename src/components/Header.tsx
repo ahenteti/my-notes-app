@@ -12,7 +12,7 @@ export default function Header() {
   const styles = getStyles(theme);
   const toggleTheme = () => {
     setTheme(theme == ThemeEnum.Dark ? ThemeEnum.Light : ThemeEnum.Dark);
-    themeStorage.updateTheme(theme);
+    themeStorage.toggleTheme(theme);
   };
 
   return (
