@@ -2,18 +2,12 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { ThemeEnum } from '../services/ThemeEnum';
 import { Color } from '../services/Color';
-import { Feather } from '@expo/vector-icons';
 import { useTheme } from '../services/ThemeContext';
-import { ThemeStorage } from '../services/ThemeStorage';
+import ToggleThemeButton from './ToggleThemeButton';
 
 export default function Header() {
-  const { themeStorage } = Header.dependencies;
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const styles = getStyles(theme);
-  const toggleTheme = () => {
-    setTheme(theme == ThemeEnum.Dark ? ThemeEnum.Light : ThemeEnum.Dark);
-    themeStorage.toggleTheme(theme);
-  };
 
   return (
     <View style={styles.container}>
@@ -21,16 +15,10 @@ export default function Header() {
         <Image style={styles.image} source={require('../../assets/logo.png')} />
         <Text style={styles.text}>My Memory</Text>
       </View>
-
-      {theme == ThemeEnum.Dark ? <Feather name='sun' size={24} color='#CCC' onPress={toggleTheme} /> : null}
-      {theme == ThemeEnum.Light ? <Feather name='moon' size={24} color='#444' onPress={toggleTheme} /> : null}
+      <ToggleThemeButton></ToggleThemeButton>
     </View>
   );
 }
-
-Header.dependencies = {
-  themeStorage: ThemeStorage.getInstance(),
-};
 
 const getStyles = (theme: ThemeEnum) => {
   return StyleSheet.create({

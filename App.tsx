@@ -59,7 +59,7 @@ export default function App() {
   const { themeStorage } = App.dependencies;
   const [theme, setTheme] = React.useState(ThemeEnum.Light);
 
-  useEffect(setThemeFromLocalStorage, []);
+  useEffect(setThemeStateFromLocalStorage, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -72,7 +72,7 @@ export default function App() {
     </ThemeContext.Provider>
   );
 
-  function setThemeFromLocalStorage() {
+  function setThemeStateFromLocalStorage() {
     themeStorage.isDark().then((isDark) => setTheme(isDark ? ThemeEnum.Dark : ThemeEnum.Light));
   }
 }
