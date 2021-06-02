@@ -5,11 +5,15 @@ import { ThemeEnum } from '../../common/services/ThemeEnum';
 import { Color } from '../../common/services/Color';
 import { useTheme } from '../../common/services/ThemeContext';
 
-export default function AddMemoryButton() {
+interface AddMemoryButtonProps {
+  onPress: () => void;
+}
+
+export default function AddMemoryButton({ onPress }: AddMemoryButtonProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Ionicons style={styles.button} name='add' />
     </TouchableOpacity>
   );
