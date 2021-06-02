@@ -20,7 +20,7 @@ const getStyles = (theme: ThemeEnum) => {
     container: {
       backgroundColor: BACKGROUND_COLOR.get(theme),
       minHeight: '100%',
-      paddingBottom: 125, // inspiration: https://stackoverflow.com/questions/46196242/react-native-flatlist-last-item-visibility-issue
+      paddingBottom: 10,
     },
   });
 };

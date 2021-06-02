@@ -1,13 +1,12 @@
 import 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
 import HomeScreen from './src/screens/home-screen/HomeScreen';
-import { ThemeContext } from './src/common/services/ThemeContext';
 import { ThemeEnum } from './src/common/services/ThemeEnum';
-import { ThemeStorage } from './src/common/services/ThemeStorage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddMemoryScreen from './src/screens/add-memory-screen/AddMemoryScreen';
-import { HOME_SCREEN_HEADER_OPTIONS } from './src/screens/home-screen/HomeScreenHeader';
+import { ThemeContext } from './src/common/services/ThemeContext';
+import { ThemeStorage } from './src/common/services/ThemeStorage';
 
 interface AppProps {
   themeStorage?: ThemeStorage;
@@ -24,7 +23,7 @@ export default function App({ themeStorage = ThemeStorage.getInstance() }: AppPr
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name='Home' component={HomeScreen} options={HOME_SCREEN_HEADER_OPTIONS} />
+          {HomeScreen(Stack)}
           <Stack.Screen name='Add Memory' component={AddMemoryScreen} />
         </Stack.Navigator>
       </NavigationContainer>

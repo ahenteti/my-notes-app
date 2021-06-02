@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableHighlight } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ThemeEnum } from '../../common/services/ThemeEnum';
 import { Color } from '../../common/services/Color';
@@ -13,9 +13,9 @@ export default function AddMemoryButton({ onPress }: AddMemoryButtonProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
   return (
-    <TouchableHighlight style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Ionicons style={styles.button} name='add' />
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 
@@ -26,7 +26,7 @@ const getStyles = (theme: ThemeEnum) => {
       alignItems: 'center',
       justifyContent: 'center',
       position: 'absolute',
-      bottom: 75,
+      bottom: 20,
       right: 20,
       width: 65,
       height: 65,

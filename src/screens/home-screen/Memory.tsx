@@ -29,7 +29,7 @@ const getStyles = (theme: ThemeEnum) => {
       backgroundColor: BACKGROUND_COLOR.get(theme),
       padding: 15,
       margin: 10,
-      marginBottom: 2,
+      marginBottom: 0,
       borderRadius: 3,
     },
     label: {

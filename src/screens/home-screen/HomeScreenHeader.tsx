@@ -4,11 +4,9 @@ import { ThemeEnum } from '../../common/services/ThemeEnum';
 import { Color } from '../../common/services/Color';
 import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
-import { StackNavigationOptions } from '@react-navigation/stack';
 
-const HEADER_HEIGHT = 55;
+export const HEADER_HEIGHT = 55;
 const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
-const BORDER_COLOR = new Color('#EEE', '#1C1F23');
 const TEXT_COLOR = new Color('#1e96fc', '#1e96fc');
 
 export default function HomeScreenHeader() {
@@ -26,17 +24,6 @@ export default function HomeScreenHeader() {
   );
 }
 
-export const HOME_SCREEN_HEADER_OPTIONS: StackNavigationOptions = {
-  headerTitle: HomeScreenHeader,
-  headerStyle: {
-    height: HEADER_HEIGHT,
-  },
-  headerTitleContainerStyle: {
-    left: 0,
-    right: 0,
-  },
-};
-
 const getStyles = (theme: ThemeEnum) => {
   return StyleSheet.create({
     container: {
@@ -47,8 +34,6 @@ const getStyles = (theme: ThemeEnum) => {
       height: HEADER_HEIGHT,
       paddingLeft: 15,
       paddingRight: 15,
-      borderBottomWidth: 2,
-      borderBottomColor: BORDER_COLOR.get(theme),
       backgroundColor: BACKGROUND_COLOR.get(theme),
     },
     left: {

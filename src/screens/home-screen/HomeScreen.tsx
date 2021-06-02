@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { ADD_MEMORY_SCREEN_NAME } from '../add-memory-screen/AddMemoryScreen';
 import AddMemoryButton from './AddMemoryButton';
-import HomeScreenHeader from './HomeScreenHeader';
+import HomeScreenHeader, { HEADER_HEIGHT } from './HomeScreenHeader';
 import Memories from './Memories';
 
 const DATA = [
@@ -53,17 +53,33 @@ const DATA = [
   },
 ];
 
-interface HomeScreenProps {
-  navigation: any;
-}
-
 export const HOME_SCREEN_NAME = 'Home';
 
-export default function HomeScreen({ navigation }: HomeScreenProps) {
+function HomeScreenComponent({ navigation }: any) {
   return (
     <View>
+      <StatusBar barStyle='default' />
       <Memories memories={DATA}></Memories>
       <AddMemoryButton onPress={() => navigation.navigate(ADD_MEMORY_SCREEN_NAME)}></AddMemoryButton>
     </View>
+  );
+}
+
+export default function HomeScreen(Stack: any) {
+  return (
+    <Stack.Screen
+      name={HOME_SCREEN_NAME}
+      component={HomeScreenComponent}
+      options={{
+        headerTitle: HomeScreenHeader,
+        headerStyle: {
+          height: HEADER_HEIGHT,
+        },
+        headerTitleContainerStyle: {
+          left: 0,
+          right: 0,
+        },
+      }}
+    />
   );
 }
