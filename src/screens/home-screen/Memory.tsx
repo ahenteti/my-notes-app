@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { ThemeEnum } from '../services/ThemeEnum';
-import { Color } from '../services/Color';
-import { useTheme } from '../services/ThemeContext';
+import { ThemeEnum } from '../../common/services/ThemeEnum';
+import { Color } from '../../common/services/Color';
+import { useTheme } from '../../common/services/ThemeContext';
 
 export interface MemoryProps {
   id: string;

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { StatusBar, View } from 'react-native';
-import HomeScreen from './src/components/screens/HomeScreen';
-import { ThemeContext } from './src/services/ThemeContext';
-import { ThemeEnum } from './src/services/ThemeEnum';
-import { ThemeStorage } from './src/services/ThemeStorage';
+import HomeScreen from './src/screens/home-screen/HomeScreen';
+import { ThemeContext } from './src/common/services/ThemeContext';
+import { ThemeEnum } from './src/common/services/ThemeEnum';
+import { ThemeStorage } from './src/common/services/ThemeStorage';
 
 interface AppProps {
   themeStorage?: ThemeStorage;

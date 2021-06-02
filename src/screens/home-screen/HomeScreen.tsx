@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import AddMemoryButton from '../AddMemoryButton';
-import Header from '../Header';
-import Memories from '../Memories';
+import AddMemoryButton from './AddMemoryButton';
+import HomeScreenHeader from './HomeScreenHeader';
+import Memories from './Memories';
 
 const DATA = [
   {
@@ -55,7 +55,7 @@ const DATA = [
 export default function HomeScreen() {
   return (
     <View>
-      <Header></Header>
+      <HomeScreenHeader></HomeScreenHeader>
       <Memories memories={DATA}></Memories>
       <AddMemoryButton></AddMemoryButton>
     </View>

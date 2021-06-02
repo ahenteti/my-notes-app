@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
-import { ThemeEnum } from '../services/ThemeEnum';
-import { Color } from '../services/Color';
+import { ThemeEnum } from '../../common/services/ThemeEnum';
+import { Color } from '../../common/services/Color';
 import { MemoryProps, renderMemory } from './Memory';
-import { useTheme } from '../services/ThemeContext';
+import { useTheme } from '../../common/services/ThemeContext';
 
 export default function Memory(props: { memories: MemoryProps[] }) {
   const { theme } = useTheme();

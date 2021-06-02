@@ -1,18 +1,18 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { ThemeEnum } from '../services/ThemeEnum';
-import { Color } from '../services/Color';
-import { useTheme } from '../services/ThemeContext';
-import ToggleThemeButton from './ToggleThemeButton';
+import { ThemeEnum } from '../../common/services/ThemeEnum';
+import { Color } from '../../common/services/Color';
+import { useTheme } from '../../common/services/ThemeContext';
+import ToggleThemeButton from '../../common/components/ToggleThemeButton';
 
-export default function Header() {
+export default function HomeScreenHeader() {
   const { theme } = useTheme();
   const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Image style={styles.image} source={require('../../assets/logo.png')} />
+        <Image style={styles.image} source={require('../../../assets/logo.png')} />
         <Text style={styles.text}>My Memory</Text>
       </View>
       <ToggleThemeButton></ToggleThemeButton>
