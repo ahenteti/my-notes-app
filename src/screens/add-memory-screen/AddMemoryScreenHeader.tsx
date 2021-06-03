@@ -1,23 +1,28 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { ThemeEnum } from '../../common/services/ThemeEnum';
 import { Color } from '../../common/services/Color';
 import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
 import { HEADER_HEIGHT } from '../../common/Constants';
+import { Ionicons } from '@expo/vector-icons';
+import { HOME_SCREEN_NAME } from '../home-screen/HomeScreen';
+import { useNavigation } from '@react-navigation/native';
 
 const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
-const TEXT_COLOR = new Color('#1e96fc', '#1e96fc');
+const TEXT_COLOR = new Color('#333', '#EEE');
+const ARROW_COLOR = new Color('#333', '#EEE');
 
-export default function HomeScreenHeader() {
+export default function AddMemoryScreenHeader() {
   const { theme } = useTheme();
+  const navigation = useNavigation();
   const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Image style={styles.image} source={require('../../../assets/logo.png')} />
-        <Text style={styles.text}>My Memory</Text>
+        <Ionicons name='arrow-back' style={styles.arrow} onPress={() => navigation.navigate(HOME_SCREEN_NAME)} />
+        <Text style={styles.text}>New Memory</Text>
       </View>
       <ToggleThemeButton></ToggleThemeButton>
     </View>
@@ -46,11 +51,11 @@ const getStyles = (theme: ThemeEnum) => {
       fontSize: 20,
       fontFamily: 'Roboto',
       fontWeight: 'bold',
-      paddingLeft: 12,
+      paddingLeft: 15,
     },
-    image: {
-      width: 25,
-      height: 25,
+    arrow: {
+      color: ARROW_COLOR.get(theme),
+      fontSize: 28,
     },
   });
 };
