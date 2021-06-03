@@ -2,7 +2,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { View, Text, StatusBar } from 'react-native';
 import { HEADER_HEIGHT } from '../../common/Constants';
-import { ThemeEnum } from '../../common/services/ThemeEnum';
 import AddMemoryScreenHeader from './AddMemoryScreenHeader';
 
 export const ADD_MEMORY_SCREEN_NAME = 'Add Memory';
@@ -16,7 +15,7 @@ export function AddMemoryScreenComponent() {
   );
 }
 
-export default function AddMemoryScreen(Stack = createStackNavigator(), theme: ThemeEnum) {
+export default function AddMemoryScreen(Stack = createStackNavigator()) {
   return (
     <Stack.Screen
       name={ADD_MEMORY_SCREEN_NAME}

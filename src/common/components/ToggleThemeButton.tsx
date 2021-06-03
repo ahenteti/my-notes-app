@@ -1,9 +1,9 @@
 import React from 'react';
-import { TouchableHighlight, View } from 'react-native';
-import { Feather } from '@expo/vector-icons';
 import { ThemeEnum } from '../services/ThemeEnum';
 import { ThemeStorage } from '../services/ThemeStorage';
 import { useTheme } from '../services/ThemeContext';
+import { View } from 'react-native';
+import FeatherIconButton from './FeatherIconButton';
 
 interface ToggleThemeButtonProps {
   themeStorage?: ThemeStorage;
@@ -18,16 +18,8 @@ export default function ToggleThemeButton({ themeStorage = ThemeStorage.getInsta
 
   return (
     <View>
-      {theme == ThemeEnum.Dark ? (
-        <TouchableHighlight>
-          <Feather name='sun' size={24} color='#CCC' onPress={toggleTheme} />
-        </TouchableHighlight>
-      ) : null}
-      {theme == ThemeEnum.Light ? (
-        <TouchableHighlight>
-          <Feather name='moon' size={24} color='#444' onPress={toggleTheme} />
-        </TouchableHighlight>
-      ) : null}
+      {theme == ThemeEnum.Dark ? <FeatherIconButton name='sun' onPress={toggleTheme} /> : null}
+      {theme == ThemeEnum.Light ? <FeatherIconButton name='moon' onPress={toggleTheme} /> : null}
     </View>
   );
 }

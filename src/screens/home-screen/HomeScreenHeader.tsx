@@ -33,7 +33,7 @@ const getStyles = (theme: ThemeEnum) => {
       justifyContent: 'space-between',
       height: HEADER_HEIGHT,
       paddingLeft: 15,
-      paddingRight: 15,
+      paddingRight: 5,
       backgroundColor: BACKGROUND_COLOR.get(theme),
     },
     left: {

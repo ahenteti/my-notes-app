@@ -24,7 +24,7 @@ export default function App({ themeStorage = ThemeStorage.getInstance() }: AppPr
       <NavigationContainer>
         <Stack.Navigator>
           {HomeScreen(Stack)}
-          {AddMemoryScreen(Stack, theme)}
+          {AddMemoryScreen(Stack)}
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeContext.Provider>

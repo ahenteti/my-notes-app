@@ -5,13 +5,12 @@ import { Color } from '../../common/services/Color';
 import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
 import { HEADER_HEIGHT } from '../../common/Constants';
-import { Ionicons } from '@expo/vector-icons';
 import { HOME_SCREEN_NAME } from '../home-screen/HomeScreen';
 import { useNavigation } from '@react-navigation/native';
+import IoniconButton from '../../common/components/IoniconButton';
 
 const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
 const TEXT_COLOR = new Color('#333', '#EEE');
-const ARROW_COLOR = new Color('#333', '#EEE');
 
 export default function AddMemoryScreenHeader() {
   const { theme } = useTheme();
@@ -21,7 +20,7 @@ export default function AddMemoryScreenHeader() {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Ionicons name='arrow-back' style={styles.arrow} onPress={() => navigation.navigate(HOME_SCREEN_NAME)} />
+        <IoniconButton name='arrow-back' size={28} onPress={() => navigation.navigate(HOME_SCREEN_NAME)} />
         <Text style={styles.text}>New Memory</Text>
       </View>
       <ToggleThemeButton></ToggleThemeButton>
@@ -38,7 +37,7 @@ const getStyles = (theme: ThemeEnum) => {
       justifyContent: 'space-between',
       height: HEADER_HEIGHT,
       paddingLeft: 15,
-      paddingRight: 15,
+      paddingRight: 5,
       backgroundColor: BACKGROUND_COLOR.get(theme),
     },
     left: {
@@ -52,10 +51,6 @@ const getStyles = (theme: ThemeEnum) => {
       fontFamily: 'Roboto',
       fontWeight: 'bold',
       paddingLeft: 15,
-    },
-    arrow: {
-      color: ARROW_COLOR.get(theme),
-      fontSize: 28,
     },
   });
 };
