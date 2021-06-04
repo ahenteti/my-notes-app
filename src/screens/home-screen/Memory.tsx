@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, StyleSheet, Dimensions, Animated } from 'react-native';
+import { GestureEvent, PanGestureHandler } from 'react-native-gesture-handler';
 import { Color } from '../../common/models/Color';
 import { Memory } from '../../common/models/Memory';
 import { Theme } from '../../common/models/Theme';
 import { useTheme } from '../../common/services/ThemeContext';
-import { MaterialIcons } from '@expo/vector-icons';
 
 const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
 const LABEL_COLOR = new Color('#444', '#EEE');
@@ -15,30 +14,63 @@ const DELETE_BUTTON_COLOR = new Color('#EEE', '#EEE');
 
 export interface MemoryProps {
   memory: Memory;
-  handleDelete: (memory: Memory) => void;
+  handleDelete: () => void;
 }
+
+const ANIMATION_DURATION = 250;
 
 export default function MemoryCard({ memory, handleDelete: deleteMemory }: MemoryProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
 
-  const renderLeftActions = () => {
-    return (
-      <View style={styles.deleteButtonContainer}>
-        <TouchableOpacity activeOpacity={0.6} onPress={() => deleteMemory(memory)}>
-          <MaterialIcons style={styles.deleteButton} name='delete-outline' />
-        </TouchableOpacity>
-      </View>
-    );
+  const windowWidth = Dimensions.get('window').width;
+  const translateX = new Animated.Value(0);
+  const opacity = new Animated.Value(1);
+  let memoryToDelete = false;
+
+  const handleMovement = (event: GestureEvent) => {
+    const translationX = event.nativeEvent.translationX as number;
+    if (translationX <= 0) return;
+    if (translationX < windowWidth * 0.5) {
+      translateX.setValue(translationX);
+      opacity.setValue(1 - translationX / windowWidth);
+    } else {
+      memoryToDelete = true;
+      Animated.timing(translateX, {
+        toValue: windowWidth,
+        duration: ANIMATION_DURATION,
+        useNativeDriver: true,
+      }).start();
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: ANIMATION_DURATION,
+        useNativeDriver: true,
+      }).start();
+      setTimeout(deleteMemory, ANIMATION_DURATION);
+    }
+  };
+
+  const handleEndMovement = () => {
+    if (memoryToDelete) return;
+    Animated.timing(translateX, {
+      toValue: 0,
+      duration: ANIMATION_DURATION,
+      useNativeDriver: true,
+    }).start();
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: ANIMATION_DURATION,
+      useNativeDriver: true,
+    }).start();
   };
 
   return (
-    <Swipeable renderLeftActions={renderLeftActions}>
-      <View style={styles.container}>
+    <PanGestureHandler onGestureEvent={handleMovement} onEnded={handleEndMovement}>
+      <Animated.View style={[styles.container, { transform: [{ translateX: translateX }], opacity: opacity }]}>
         <Text style={styles.label}>{memory.label}</Text>
         <Text style={styles.value}>{memory.value}</Text>
-      </View>
-    </Swipeable>
+      </Animated.View>
+    </PanGestureHandler>
   );
 }
 
