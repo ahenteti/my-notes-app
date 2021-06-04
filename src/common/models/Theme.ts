@@ -1,5 +1,5 @@
 import color from 'color';
-import DefaultTheme, { configureFonts } from 'react-native-paper';
+import { configureFonts } from 'react-native-paper';
 
 export interface Theme extends ReactNativePaper.Theme {}
 

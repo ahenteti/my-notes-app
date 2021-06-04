@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleProp, StyleSheet, TextStyle, TouchableWithoutFeedback, View } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { PRIMARY_COLOR } from '../Constants';
 import { Color } from '../models/Color';
+import { Theme } from '../models/Theme';
 import { useTheme } from '../services/ThemeContext';
-import { ThemeEnum } from '../models/Theme';
 
 interface StringInputProps {
   label: string;
@@ -41,7 +41,7 @@ export default function StringInput(props: StringInputProps) {
   );
 }
 
-const getStyles = (theme: ThemeEnum) => {
+const getStyles = (theme: Theme) => {
   return StyleSheet.create({
     input: {
       backgroundColor: BACKGROUND_COLOR.get(theme),

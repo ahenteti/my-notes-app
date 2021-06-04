@@ -4,8 +4,12 @@ import { Button } from 'react-native-paper';
 import { DismissKeyboard } from '../../common/components/DismissKeyborad';
 import StringInput from '../../common/components/StringInput';
 import { BODY_BACKGROUND_COLOR } from '../../common/Constants';
+import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
 import { useTheme } from '../../common/services/ThemeContext';
+
+const CANCEL_BUTTON_BACKGROUND_COLOR = new Color('#fff', '#262A2D');
+const CANCEL_BUTTON_COLOR = new Color('#555', '#EEE');
 
 export function AddMemoryForm() {
   const { theme } = useTheme();
@@ -20,9 +24,14 @@ export function AddMemoryForm() {
 
         <View style={styles.buttonsContainer}>
           <Button style={styles.saveButton} mode='contained' onPress={() => {}}>
-            {' ' + 'Save' + ' '}
+            {'  Save  '}
           </Button>
-          <Button mode='outlined' onPress={() => {}}>
+          <Button
+            mode='contained'
+            labelStyle={{ color: CANCEL_BUTTON_COLOR.get(theme) }}
+            color={CANCEL_BUTTON_BACKGROUND_COLOR.get(theme)}
+            onPress={() => {}}
+          >
             Cancel
           </Button>
         </View>
@@ -47,7 +56,7 @@ const getStyles = (theme: Theme) => {
       flexDirection: 'row-reverse',
     },
     saveButton: {
-      marginLeft: 20,
+      marginLeft: 15,
     },
   });
 };
