@@ -13,7 +13,7 @@ export default function ToggleThemeButton({ themeStorage = ThemeStorage.getInsta
   const { theme, setTheme } = useTheme();
   const toggleTheme = () => {
     setTheme(theme.dark ? Theme.Light : Theme.Dark);
-    themeStorage.toggleTheme(theme);
+    themeStorage.toggle(theme);
   };
 
   return <View>{theme.dark ? <FeatherIconButton name='sun' onPress={toggleTheme} /> : <FeatherIconButton name='moon' onPress={toggleTheme} />}</View>;

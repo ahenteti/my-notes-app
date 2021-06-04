@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { StatusBar, View } from 'react-native';
 import { ADD_MEMORY_SCREEN_NAME, HEADER_HEIGHT, HOME_SCREEN_NAME } from '../../common/Constants';
+import { MemoryStorage } from '../../common/services/MemoryStorage';
 import AddMemoryButton from './AddMemoryButton';
 import HomeScreenHeader from './HomeScreenHeader';
 import Memories from './Memories';
@@ -58,7 +59,7 @@ function HomeScreenComponent({ navigation }: any) {
   return (
     <View>
       <StatusBar barStyle='default' />
-      <Memories memories={DATA}></Memories>
+      <Memories></Memories>
       <AddMemoryButton onPress={() => navigation.navigate(ADD_MEMORY_SCREEN_NAME)}></AddMemoryButton>
     </View>
   );

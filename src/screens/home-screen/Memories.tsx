@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
-import { MemoryProps, renderMemory } from './Memory';
+import { renderMemory } from './Memory';
 import { useTheme } from '../../common/services/ThemeContext';
 import { BODY_BACKGROUND_COLOR } from '../../common/Constants';
 import { Theme } from '../../common/models/Theme';
+import { MemoryStorage } from '../../common/services/MemoryStorage';
+import { Memory } from '../../common/models/Memory';
 
-export default function Memory(props: { memories: MemoryProps[] }) {
+interface MemoriesProps {
+  memoryStorage?: MemoryStorage;
+}
+
+export default function Memories({ memoryStorage = MemoryStorage.getInstance() }: MemoriesProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
+  const [memories, setMemories] = useState<Memory[]>([]);
+  useEffect(updateMemoriesStateFromLocalStorage, []);
+
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList data={props.memories} renderItem={renderMemory} />
+      <FlatList data={memories} renderItem={renderMemory} />
     </SafeAreaView>
   );
+
+  function updateMemoriesStateFromLocalStorage() {
+    memoryStorage.getAll().then((memories) => setMemories(memories));
+  }
 }
 
 const getStyles = (theme: Theme) => {
