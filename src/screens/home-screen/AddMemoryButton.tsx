@@ -13,7 +13,7 @@ export default function AddMemoryButton({ onPress }: AddMemoryButtonProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity activeOpacity={0.6} style={styles.container} onPress={onPress}>
       <Ionicons style={styles.button} name='add' />
     </TouchableOpacity>
   );

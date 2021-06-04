@@ -52,7 +52,6 @@ const MEMORIES: Memory[] = [
 export class MemoryStorage {
   private static readonly STORAGE_KEY = 'MEMORIES_STORAGE_KEY';
   private static readonly INSTANCE = new MemoryStorage();
-  private memories: Memory[] = [];
 
   public static getInstance() {
     return MemoryStorage.INSTANCE;
@@ -61,16 +60,20 @@ export class MemoryStorage {
   private constructor(private storage: Storage = Storage.getInstance()) {}
 
   async getAll(): Promise<Memory[]> {
-    return this.storage.get(MemoryStorage.STORAGE_KEY).then((res) => {
-      let memories = JSON.parse(res || JSON.stringify(MEMORIES));
-      this.memories = memories;
-      return memories;
-    });
+    return this.storage.get(MemoryStorage.STORAGE_KEY).then((res) => JSON.parse(res || JSON.stringify(MEMORIES)));
   }
 
   async add(label: string, value: string): Promise<void> {
     const id: string = Date.now() + '';
-    this.memories.unshift({ id, label, value });
-    return this.storage.set(MemoryStorage.STORAGE_KEY, JSON.stringify(this.memories));
+    this.getAll()
+      .then((memories) => {
+        memories.unshift({ id: Date.now() + '', label, value });
+        return memories;
+      })
+      .then((memories) => this.save(memories));
+  }
+
+  async save(memories: Memory[]) {
+    return this.storage.set(MemoryStorage.STORAGE_KEY, JSON.stringify(memories));
   }
 }

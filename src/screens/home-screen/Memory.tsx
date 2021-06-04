@@ -1,27 +1,46 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler';
 import { Color } from '../../common/models/Color';
+import { Memory } from '../../common/models/Memory';
 import { Theme } from '../../common/models/Theme';
 import { useTheme } from '../../common/services/ThemeContext';
+import { MaterialIcons } from '@expo/vector-icons';
+
+const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
+const LABEL_COLOR = new Color('#444', '#EEE');
+const VALUE_COLOR = new Color('#777', '#CCC');
+const DELETE_BUTTON_BACKGROUND_COLOR = new Color('#e5383b', '#e5383b');
+const DELETE_BUTTON_COLOR = new Color('#EEE', '#EEE');
 
 export interface MemoryProps {
-  id: string;
-  label: string;
-  value: string;
+  memory: Memory;
+  handleDelete: (memory: Memory) => void;
 }
 
-export default function Memory(props: { memory: MemoryProps }) {
+export default function MemoryCard({ memory, handleDelete: deleteMemory }: MemoryProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
+
+  const renderLeftActions = () => {
+    return (
+      <View style={styles.deleteButtonContainer}>
+        <TouchableOpacity activeOpacity={0.6} onPress={() => deleteMemory(memory)}>
+          <MaterialIcons style={styles.deleteButton} name='delete-outline' />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{props.memory.label}</Text>
-      <Text style={styles.value}>{props.memory.value}</Text>
-    </View>
+    <Swipeable renderLeftActions={renderLeftActions}>
+      <View style={styles.container}>
+        <Text style={styles.label}>{memory.label}</Text>
+        <Text style={styles.value}>{memory.value}</Text>
+      </View>
+    </Swipeable>
   );
 }
-
-export const renderMemory = ({ item }: { item: MemoryProps }) => <Memory memory={item}></Memory>;
 
 const getStyles = (theme: Theme) => {
   return StyleSheet.create({
@@ -44,9 +63,20 @@ const getStyles = (theme: Theme) => {
       fontSize: 13,
       fontFamily: 'Roboto',
     },
+    deleteButtonContainer: {
+      marginTop: 10,
+      marginLeft: 10,
+      marginRight: -10,
+      borderBottomLeftRadius: 3,
+      borderTopLeftRadius: 3,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: DELETE_BUTTON_BACKGROUND_COLOR.get(theme),
+    },
+    deleteButton: {
+      color: DELETE_BUTTON_COLOR.get(theme),
+      fontSize: 34,
+      padding: 10,
+    },
   });
 };
-
-const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
-const LABEL_COLOR = new Color('#444', '#EEE');
-const VALUE_COLOR = new Color('#777', '#CCC');
