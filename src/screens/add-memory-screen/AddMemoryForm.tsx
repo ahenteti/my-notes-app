@@ -7,6 +7,7 @@ import StringInput from '../../common/components/StringInput';
 import { BODY_BACKGROUND_COLOR, HOME_SCREEN_NAME } from '../../common/Constants';
 import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
+import { useMemories } from '../../common/services/MemoriesContext';
 import { MemoryStorage } from '../../common/services/MemoryStorage';
 import { useTheme } from '../../common/services/ThemeContext';
 
@@ -19,6 +20,7 @@ interface AddMemoryFormProps {
 
 export function AddMemoryForm({ memoryStorage = MemoryStorage.getInstance() }: AddMemoryFormProps) {
   const navigation = useNavigation();
+  const { memories, setMemories } = useMemories();
   const { theme } = useTheme();
   const styles = getStyles(theme);
   const [label, setLabel] = React.useState('');
@@ -36,7 +38,10 @@ export function AddMemoryForm({ memoryStorage = MemoryStorage.getInstance() }: A
             onPress={() => {
               if (!label) return Alert.alert("Memory's label is mandatory");
               if (!value) return Alert.alert("Memory's value is mandatory");
-              memoryStorage.add(label, value);
+              const newMemories = [...memories];
+              newMemories.unshift({ id: Date.now() + '', label, value });
+              setMemories(newMemories);
+              memoryStorage.save(newMemories);
               navigation.navigate(HOME_SCREEN_NAME);
             }}
           >
