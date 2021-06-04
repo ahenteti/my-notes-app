@@ -4,10 +4,7 @@ import { ThemeEnum } from '../../common/services/ThemeEnum';
 import { Color } from '../../common/services/Color';
 import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
-import { HEADER_HEIGHT } from '../../common/Constants';
-
-const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
-const TEXT_COLOR = new Color('#1e96fc', '#1e96fc');
+import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, PRIMARY_COLOR } from '../../common/Constants';
 
 export default function HomeScreenHeader() {
   const { theme } = useTheme();
@@ -34,7 +31,7 @@ const getStyles = (theme: ThemeEnum) => {
       height: HEADER_HEIGHT,
       paddingLeft: 15,
       paddingRight: 5,
-      backgroundColor: BACKGROUND_COLOR.get(theme),
+      backgroundColor: HEADER_BACKGROUND_COLOR.get(theme),
     },
     left: {
       display: 'flex',
@@ -42,7 +39,7 @@ const getStyles = (theme: ThemeEnum) => {
       alignItems: 'center',
     },
     text: {
-      color: TEXT_COLOR.get(theme),
+      color: PRIMARY_COLOR.get(theme),
       fontSize: 20,
       fontFamily: 'Roboto',
       fontWeight: 'bold',

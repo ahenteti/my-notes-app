@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { ThemeEnum } from '../../common/services/ThemeEnum';
-import { Color } from '../../common/services/Color';
 import { MemoryProps, renderMemory } from './Memory';
 import { useTheme } from '../../common/services/ThemeContext';
+import { BODY_BACKGROUND_COLOR } from '../../common/Constants';
 
 export default function Memory(props: { memories: MemoryProps[] }) {
   const { theme } = useTheme();
@@ -18,11 +18,9 @@ export default function Memory(props: { memories: MemoryProps[] }) {
 const getStyles = (theme: ThemeEnum) => {
   return StyleSheet.create({
     container: {
-      backgroundColor: BACKGROUND_COLOR.get(theme),
+      backgroundColor: BODY_BACKGROUND_COLOR.get(theme),
       minHeight: '100%',
       paddingBottom: 10,
     },
   });
 };
-
-const BACKGROUND_COLOR = new Color('#EEE', '#1C1F23');

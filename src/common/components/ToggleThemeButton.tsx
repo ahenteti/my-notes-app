@@ -3,7 +3,7 @@ import { ThemeEnum } from '../services/ThemeEnum';
 import { ThemeStorage } from '../services/ThemeStorage';
 import { useTheme } from '../services/ThemeContext';
 import { View } from 'react-native';
-import FeatherIconButton from './FeatherIconButton';
+import { FeatherIconButton } from './IconButton';
 
 interface ToggleThemeButtonProps {
   themeStorage?: ThemeStorage;

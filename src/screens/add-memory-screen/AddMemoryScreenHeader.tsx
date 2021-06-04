@@ -4,12 +4,11 @@ import { ThemeEnum } from '../../common/services/ThemeEnum';
 import { Color } from '../../common/services/Color';
 import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
-import { HEADER_HEIGHT } from '../../common/Constants';
+import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT } from '../../common/Constants';
 import { HOME_SCREEN_NAME } from '../home-screen/HomeScreen';
 import { useNavigation } from '@react-navigation/native';
-import IoniconButton from '../../common/components/IoniconButton';
+import IoniconButton from '../../common/components/IconButton';
 
-const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
 const TEXT_COLOR = new Color('#333', '#EEE');
 
 export default function AddMemoryScreenHeader() {
@@ -36,9 +35,9 @@ const getStyles = (theme: ThemeEnum) => {
       alignItems: 'center',
       justifyContent: 'space-between',
       height: HEADER_HEIGHT,
-      paddingLeft: 15,
+      paddingLeft: 5,
       paddingRight: 5,
-      backgroundColor: BACKGROUND_COLOR.get(theme),
+      backgroundColor: HEADER_BACKGROUND_COLOR.get(theme),
     },
     left: {
       display: 'flex',
