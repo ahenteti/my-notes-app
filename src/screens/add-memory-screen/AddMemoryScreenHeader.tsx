@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { ThemeEnum } from '../../common/services/ThemeEnum';
-import { Color } from '../../common/services/Color';
+import { Color } from '../../common/models/Color';
 import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
-import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT } from '../../common/Constants';
-import { HOME_SCREEN_NAME } from '../home-screen/HomeScreen';
+import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, HOME_SCREEN_NAME } from '../../common/Constants';
 import { useNavigation } from '@react-navigation/native';
 import IoniconButton from '../../common/components/IconButton';
+import { Theme } from '../../common/models/Theme';
 
 const TEXT_COLOR = new Color('#333', '#EEE');
 
@@ -27,7 +26,7 @@ export default function AddMemoryScreenHeader() {
   );
 }
 
-const getStyles = (theme: ThemeEnum) => {
+const getStyles = (theme: Theme) => {
   return StyleSheet.create({
     container: {
       display: 'flex',

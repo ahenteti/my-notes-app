@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { ThemeEnum } from '../../common/services/ThemeEnum';
-import { Color } from '../../common/services/Color';
+import { Color } from '../../common/models/Color';
 import { useTheme } from '../../common/services/ThemeContext';
+import { Theme } from '../../common/models/Theme';
 
 interface AddMemoryButtonProps {
   onPress: () => void;
@@ -19,7 +19,7 @@ export default function AddMemoryButton({ onPress }: AddMemoryButtonProps) {
   );
 }
 
-const getStyles = (theme: ThemeEnum) => {
+const getStyles = (theme: Theme) => {
   return StyleSheet.create({
     container: {
       paddingLeft: 3,

@@ -1,10 +1,9 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { ThemeEnum } from '../../common/services/ThemeEnum';
-import { Color } from '../../common/services/Color';
 import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
 import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, PRIMARY_COLOR } from '../../common/Constants';
+import { Theme } from '../../common/models/Theme';
 
 export default function HomeScreenHeader() {
   const { theme } = useTheme();
@@ -21,7 +20,7 @@ export default function HomeScreenHeader() {
   );
 }
 
-const getStyles = (theme: ThemeEnum) => {
+const getStyles = (theme: Theme) => {
   return StyleSheet.create({
     container: {
       display: 'flex',

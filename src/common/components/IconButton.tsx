@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableHighlight } from 'react-native';
 import { Feather, Ionicons } from '@expo/vector-icons';
-import { Color } from '../services/Color';
+import { Color } from '../models/Color';
 import { useTheme } from '../services/ThemeContext';
 
 const ICON_COLOR = new Color('#444', '#CCC');

@@ -1,4 +1,7 @@
-import { Color } from './services/Color';
+import { Color } from './models/Color';
+
+export const HOME_SCREEN_NAME = 'Home';
+export const ADD_MEMORY_SCREEN_NAME = 'Add Memory';
 
 export const HEADER_HEIGHT = 55;
 export const HEADER_BACKGROUND_COLOR = new Color('#FFF', '#262A2D');

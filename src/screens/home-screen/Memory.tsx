@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { ThemeEnum } from '../../common/services/ThemeEnum';
-import { Color } from '../../common/services/Color';
+import { Color } from '../../common/models/Color';
+import { Theme } from '../../common/models/Theme';
 import { useTheme } from '../../common/services/ThemeContext';
 
 export interface MemoryProps {
@@ -23,7 +23,7 @@ export default function Memory(props: { memory: MemoryProps }) {
 
 export const renderMemory = ({ item }: { item: MemoryProps }) => <Memory memory={item}></Memory>;
 
-const getStyles = (theme: ThemeEnum) => {
+const getStyles = (theme: Theme) => {
   return StyleSheet.create({
     container: {
       backgroundColor: BACKGROUND_COLOR.get(theme),

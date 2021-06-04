@@ -4,8 +4,8 @@ import { Button } from 'react-native-paper';
 import { DismissKeyboard } from '../../common/components/DismissKeyborad';
 import StringInput from '../../common/components/StringInput';
 import { BODY_BACKGROUND_COLOR } from '../../common/Constants';
+import { Theme } from '../../common/models/Theme';
 import { useTheme } from '../../common/services/ThemeContext';
-import { ThemeEnum } from '../../common/services/ThemeEnum';
 
 export function AddMemoryForm() {
   const { theme } = useTheme();
@@ -31,7 +31,7 @@ export function AddMemoryForm() {
   );
 }
 
-const getStyles = (theme: ThemeEnum) => {
+const getStyles = (theme: Theme) => {
   return StyleSheet.create({
     container: {
       backgroundColor: BODY_BACKGROUND_COLOR.get(theme),

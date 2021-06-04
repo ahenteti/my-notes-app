@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleProp, StyleSheet, TextStyle, TouchableWithoutFeedback, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { PRIMARY_COLOR } from '../Constants';
-import { Color } from '../services/Color';
+import { Color } from '../models/Color';
 import { useTheme } from '../services/ThemeContext';
-import { ThemeEnum } from '../services/ThemeEnum';
+import { ThemeEnum } from '../models/Theme';
 
 interface StringInputProps {
   label: string;

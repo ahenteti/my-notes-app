@@ -1,11 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { View, StatusBar } from 'react-native';
-import { HEADER_HEIGHT } from '../../common/Constants';
+import { ADD_MEMORY_SCREEN_NAME, HEADER_HEIGHT } from '../../common/Constants';
 import { AddMemoryForm } from './AddMemoryForm';
 import AddMemoryScreenHeader from './AddMemoryScreenHeader';
-
-export const ADD_MEMORY_SCREEN_NAME = 'Add Memory';
 
 export function AddMemoryScreenComponent() {
   return (
