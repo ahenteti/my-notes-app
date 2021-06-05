@@ -48,6 +48,6 @@ const getStyles = (theme: Theme) => {
   });
 };
 
-const BACKGROUND_COLOR = new Color('#FFF', '#1C1F23');
+const BACKGROUND_COLOR = new Color('#FFF', '#333');
 const SHADOW_COLOR = new Color('#000', '#FFF');
 const TEXT_COLOR = new Color('#ef476f', '#ef476f');
