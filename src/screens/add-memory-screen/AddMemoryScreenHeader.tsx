@@ -5,7 +5,7 @@ import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
 import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, HOME_SCREEN_NAME } from '../../common/Constants';
 import { useNavigation } from '@react-navigation/native';
-import IoniconButton from '../../common/components/IconButton';
+import IconButton from '../../common/components/IconButton';
 import { Theme } from '../../common/models/Theme';
 
 const TEXT_COLOR = new Color('#333', '#EEE');
@@ -18,7 +18,7 @@ export default function AddMemoryScreenHeader() {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <IoniconButton name='arrow-back' size={28} onPress={() => navigation.navigate(HOME_SCREEN_NAME)} />
+        <IconButton name='arrow-back' size={28} onPress={() => navigation.navigate(HOME_SCREEN_NAME)} />
         <Text style={styles.text}>New Memory</Text>
       </View>
       <ToggleThemeButton></ToggleThemeButton>

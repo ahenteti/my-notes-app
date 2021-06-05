@@ -4,22 +4,22 @@ import { HelperText } from 'react-native-paper';
 import { Color } from '../models/Color';
 import { Theme } from '../models/Theme';
 import { useTheme } from '../services/ThemeContext';
-import OptionalInput from './OptionalInput';
+import TextInput from './TextInput';
 
-interface MandatoryInputProps {
+interface MandatoryTextInputProps {
   label: string;
   value: string;
   onChange: (text: string) => void;
   style?: StyleProp<TextStyle>;
 }
 
-export default function MandatoryInput(props: MandatoryInputProps) {
+export default function MandatoryTextInput(props: MandatoryTextInputProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
   const [focused, setFocused] = useState(false);
   return (
     <>
-      <OptionalInput label={props.label} value={props.value} onChange={props.onChange} onFocus={() => setFocused(true)}></OptionalInput>
+      <TextInput label={props.label} value={props.value} onChange={props.onChange} onFocus={() => setFocused(true)}></TextInput>
       <HelperText type='error' visible={props.value == '' && focused} style={styles.helperText}>
         {props.label + ' is mandatory'}
       </HelperText>

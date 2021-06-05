@@ -2,8 +2,8 @@ import React from 'react';
 import { ThemeStorage } from '../services/ThemeStorage';
 import { useTheme } from '../services/ThemeContext';
 import { View } from 'react-native';
-import { FeatherIconButton } from './IconButton';
 import { Theme } from '../models/Theme';
+import IconButton, { IconButtonType } from './IconButton';
 
 interface ToggleThemeButtonProps {
   themeStorage?: ThemeStorage;
@@ -16,5 +16,13 @@ export default function ToggleThemeButton({ themeStorage = ThemeStorage.getInsta
     themeStorage.toggle(theme);
   };
 
-  return <View>{theme.dark ? <FeatherIconButton name='sun' onPress={toggleTheme} /> : <FeatherIconButton name='moon' onPress={toggleTheme} />}</View>;
+  return (
+    <View>
+      {theme.dark ? (
+        <IconButton type={IconButtonType.Feather} name='sun' onPress={toggleTheme} />
+      ) : (
+        <IconButton type={IconButtonType.Feather} name='moon' onPress={toggleTheme} />
+      )}
+    </View>
+  );
 }

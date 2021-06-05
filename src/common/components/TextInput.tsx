@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleProp, StyleSheet, TextStyle } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { TextInput as PaperInput } from 'react-native-paper';
 import { PRIMARY_COLOR } from '../Constants';
 import { Color } from '../models/Color';
 import { Theme } from '../models/Theme';
 import { useTheme } from '../services/ThemeContext';
 
-interface OptionalInputProps {
+interface TextInputProps {
   label: string;
   value: string;
   onChange: (text: string) => void;
@@ -19,11 +19,11 @@ const PLACEHOLDER_COLOR = new Color('#1e96fc', '#1e96fc');
 const PLACEHOLDER_COLOR_ON_EMPTY_INPUT = new Color('#555', '#AAA');
 const BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 
-export default function OptionalInput(props: OptionalInputProps) {
+export default function TextInput(props: TextInputProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
   return (
-    <TextInput
+    <PaperInput
       style={[props.style, styles.input]}
       theme={{
         colors: {
