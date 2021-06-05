@@ -15,16 +15,6 @@ export class MemoryStorage {
     return this.storage.get(MemoryStorage.STORAGE_KEY).then((res) => JSON.parse(res || JSON.stringify([])));
   }
 
-  async add(label: string, value: string): Promise<void> {
-    const id: string = Date.now() + '';
-    this.getAll()
-      .then((memories) => {
-        memories.unshift({ id: Date.now() + '', label, value });
-        return memories;
-      })
-      .then((memories) => this.save(memories));
-  }
-
   async save(memories: Memory[]) {
     return this.storage.set(MemoryStorage.STORAGE_KEY, JSON.stringify(memories));
   }
