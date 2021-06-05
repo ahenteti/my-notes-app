@@ -6,10 +6,11 @@ import { Color } from '../models/Color';
 import { Theme } from '../models/Theme';
 import { useTheme } from '../services/ThemeContext';
 
-interface StringInputProps {
+interface OptionalInputProps {
   label: string;
   value: string;
   onChange: (text: string) => void;
+  onFocus?: () => void;
   style?: StyleProp<TextStyle>;
 }
 
@@ -18,7 +19,7 @@ const PLACEHOLDER_COLOR = new Color('#1e96fc', '#1e96fc');
 const PLACEHOLDER_COLOR_ON_EMPTY_INPUT = new Color('#555', '#AAA');
 const BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 
-export default function StringInput(props: StringInputProps) {
+export default function OptionalInput(props: OptionalInputProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
   return (
@@ -31,6 +32,7 @@ export default function StringInput(props: StringInputProps) {
           placeholder: props.value == '' ? PLACEHOLDER_COLOR_ON_EMPTY_INPUT.get(theme) : PLACEHOLDER_COLOR.get(theme),
         },
       }}
+      onFocus={props.onFocus}
       selectionColor={PRIMARY_COLOR.get(theme)}
       outlineColor={'transparent'}
       mode='outlined'
