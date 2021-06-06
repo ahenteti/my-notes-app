@@ -4,7 +4,7 @@ import { TextInput as PaperInput } from 'react-native-paper';
 import { PRIMARY_COLOR } from '../Constants';
 import { Color } from '../models/Color';
 import { Theme } from '../models/Theme';
-import { useTheme } from '../services/ThemeContext';
+import { useAppData } from '../services/AppDataContext';
 
 interface TextInputProps {
   label: string;
@@ -20,20 +20,20 @@ const PLACEHOLDER_COLOR_ON_EMPTY_INPUT = new Color('#555', '#AAA');
 const BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 
 export default function TextInput(props: TextInputProps) {
-  const { theme } = useTheme();
-  const styles = getStyles(theme);
+  const { appData } = useAppData();
+  const styles = getStyles(appData.theme);
   return (
     <PaperInput
       style={[props.style, styles.input]}
       theme={{
         colors: {
-          primary: PRIMARY_COLOR.get(theme),
-          text: TEXT_COLOR.get(theme),
-          placeholder: props.value == '' ? PLACEHOLDER_COLOR_ON_EMPTY_INPUT.get(theme) : PLACEHOLDER_COLOR.get(theme),
+          primary: PRIMARY_COLOR.get(appData.theme),
+          text: TEXT_COLOR.get(appData.theme),
+          placeholder: props.value == '' ? PLACEHOLDER_COLOR_ON_EMPTY_INPUT.get(appData.theme) : PLACEHOLDER_COLOR.get(appData.theme),
         },
       }}
       onFocus={props.onFocus}
-      selectionColor={PRIMARY_COLOR.get(theme)}
+      selectionColor={PRIMARY_COLOR.get(appData.theme)}
       outlineColor={'transparent'}
       mode='outlined'
       label={props.label}

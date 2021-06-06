@@ -6,7 +6,7 @@ import HomeScreenHeader from './HomeScreenHeader';
 import Memories from './Memories';
 import NoMemories from './NoMemories';
 
-function HomeScreenComponent({ navigation }: any) {
+function HomeScreenComponent() {
   return (
     <View>
       <StatusBar barStyle='default' />

@@ -4,7 +4,7 @@ import { GestureEvent, PanGestureHandler } from 'react-native-gesture-handler';
 import { Color } from '../../common/models/Color';
 import { Memory } from '../../common/models/Memory';
 import { Theme } from '../../common/models/Theme';
-import { useTheme } from '../../common/services/ThemeContext';
+import { useAppData } from '../../common/services/AppDataContext';
 
 const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
 const BACKGROUND_COLOR_ON_DELETION_STATE = new Color('#EEE', '#1C1F23');
@@ -26,8 +26,8 @@ const LABEL_FONT_SIZE_INIT_VALUE = 18;
 const VALUE_FONT_SIZE_INIT_VALUE = 13;
 
 export default function MemoryCard({ memory, handleDelete: deleteMemory }: MemoryProps) {
-  const { theme } = useTheme();
-  const styles = getStyles(theme);
+  const { appData } = useAppData();
+  const styles = getStyles(appData.theme);
 
   const windowWidth = Dimensions.get('window').width;
   const translateX = new Animated.Value(0);
@@ -38,7 +38,7 @@ export default function MemoryCard({ memory, handleDelete: deleteMemory }: Memor
   const valueFontSize = new Animated.Value(VALUE_FONT_SIZE_INIT_VALUE);
   const backgroundColor = opacity.interpolate({
     inputRange: [0, 1],
-    outputRange: [BACKGROUND_COLOR_ON_DELETION_STATE.get(theme), BACKGROUND_COLOR.get(theme)],
+    outputRange: [BACKGROUND_COLOR_ON_DELETION_STATE.get(appData.theme), BACKGROUND_COLOR.get(appData.theme)],
   });
   let memoryOnDeletionState = false;
 

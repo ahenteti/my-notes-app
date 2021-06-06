@@ -1,24 +1,26 @@
 import React from 'react';
-import { ThemeStorage } from '../services/ThemeStorage';
-import { useTheme } from '../services/ThemeContext';
 import { View } from 'react-native';
 import { Theme } from '../models/Theme';
+import { useAppData } from '../services/AppDataContext';
+import { AppDataStorage } from '../services/AppDataStorage';
 import IconButton, { IconButtonType } from './IconButton';
 
 interface ToggleThemeButtonProps {
-  themeStorage?: ThemeStorage;
+  appDataStorage?: AppDataStorage;
 }
 
-export default function ToggleThemeButton({ themeStorage = ThemeStorage.getInstance() }: ToggleThemeButtonProps) {
-  const { theme, setTheme } = useTheme();
+export default function ToggleThemeButton({ appDataStorage = AppDataStorage.getInstance() }: ToggleThemeButtonProps) {
+  const { appData, setAppData } = useAppData();
   const toggleTheme = () => {
-    setTheme(theme.dark ? Theme.Light : Theme.Dark);
-    themeStorage.toggle(theme);
+    const theme = appData.theme.dark ? Theme.Light : Theme.Dark;
+    const newAppData = { ...appData, theme };
+    setAppData(newAppData);
+    appDataStorage.save(newAppData);
   };
 
   return (
     <View>
-      {theme.dark ? (
+      {appData.theme.dark ? (
         <IconButton type={IconButtonType.Feather} name='sun' onPress={toggleTheme} />
       ) : (
         <IconButton type={IconButtonType.Feather} name='moon' onPress={toggleTheme} />

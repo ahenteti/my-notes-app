@@ -4,44 +4,35 @@ import HomeScreen from './src/screens/home-screen/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddMemoryScreen from './src/screens/add-memory-screen/AddMemoryScreen';
-import { ThemeStorage } from './src/common/services/ThemeStorage';
 import { Provider as ThemePaperProvider } from 'react-native-paper';
-import { Theme } from './src/common/models/Theme';
-import { ThemeContext } from './src/common/services/ThemeContext';
-import { MemoriesContext } from './src/common/services/MemoriesContext';
-import { Memory } from './src/common/models/Memory';
-import { MemoryStorage } from './src/common/services/MemoryStorage';
+import { DefaultAddData } from './src/common/models/AppData';
+import { AppDataContext } from './src/common/services/AppDataContext';
+import { AppDataStorage } from './src/common/services/AppDataStorage';
 
 interface AppProps {
-  themeStorage?: ThemeStorage;
-  memoryStorage?: MemoryStorage;
+  appDataStorage?: AppDataStorage;
 }
 
 const Stack = createStackNavigator();
 
-export default function App({ themeStorage = ThemeStorage.getInstance(), memoryStorage = MemoryStorage.getInstance() }: AppProps) {
-  const [theme, setTheme] = React.useState(Theme.Light);
-  const [memories, setMemories] = React.useState<Memory[]>([]);
-
-  useEffect(updateStateFromLocalStorage, []);
+export default function App({ appDataStorage = AppDataStorage.getInstance() }: AppProps) {
+  const [appData, setAppData] = React.useState(DefaultAddData);
+  useEffect(loadAppDataFromStorage, []);
 
   return (
-    <MemoriesContext.Provider value={{ memories, setMemories }}>
-      <ThemeContext.Provider value={{ theme, setTheme }}>
-        <ThemePaperProvider theme={theme}>
-          <NavigationContainer>
-            <Stack.Navigator>
-              {HomeScreen(Stack)}
-              {AddMemoryScreen(Stack)}
-            </Stack.Navigator>
-          </NavigationContainer>
-        </ThemePaperProvider>
-      </ThemeContext.Provider>
-    </MemoriesContext.Provider>
+    <AppDataContext.Provider value={{ appData, setAppData }}>
+      <ThemePaperProvider theme={appData.theme}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            {HomeScreen(Stack)}
+            {AddMemoryScreen(Stack)}
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ThemePaperProvider>
+    </AppDataContext.Provider>
   );
 
-  function updateStateFromLocalStorage() {
-    themeStorage.isDark().then((isDark) => setTheme(isDark ? Theme.Dark : Theme.Light));
-    memoryStorage.getAll().then((memories) => setMemories(memories));
+  function loadAppDataFromStorage() {
+    appDataStorage.get().then(setAppData);
   }
 }

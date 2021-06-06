@@ -1,19 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Color } from '../../common/models/Color';
-import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
 import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, HOME_SCREEN_NAME } from '../../common/Constants';
 import { useNavigation } from '@react-navigation/native';
 import IconButton from '../../common/components/IconButton';
 import { Theme } from '../../common/models/Theme';
+import { useAppData } from '../../common/services/AppDataContext';
 
 const TEXT_COLOR = new Color('#333', '#EEE');
 
 export default function AddMemoryScreenHeader() {
-  const { theme } = useTheme();
   const navigation = useNavigation();
-  const styles = getStyles(theme);
+  const { appData } = useAppData();
+  const styles = getStyles(appData.theme);
 
   return (
     <View style={styles.container}>

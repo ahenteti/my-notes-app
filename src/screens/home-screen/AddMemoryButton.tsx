@@ -2,16 +2,16 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Color } from '../../common/models/Color';
-import { useTheme } from '../../common/services/ThemeContext';
 import { Theme } from '../../common/models/Theme';
+import { useAppData } from '../../common/services/AppDataContext';
 
 interface AddMemoryButtonProps {
   onPress: () => void;
 }
 
 export default function AddMemoryButton({ onPress }: AddMemoryButtonProps) {
-  const { theme } = useTheme();
-  const styles = getStyles(theme);
+  const { appData } = useAppData();
+  const styles = getStyles(appData.theme);
   return (
     <TouchableOpacity activeOpacity={0.6} style={styles.container} onPress={onPress}>
       <Ionicons style={styles.button} name='add' />

@@ -7,22 +7,20 @@ import MandatoryTextInput from '../../common/components/MandatoryTextInput';
 import { BODY_BACKGROUND_COLOR, HOME_SCREEN_NAME } from '../../common/Constants';
 import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
-import { useMemories } from '../../common/services/MemoriesContext';
-import { MemoryStorage } from '../../common/services/MemoryStorage';
-import { useTheme } from '../../common/services/ThemeContext';
+import { useAppData } from '../../common/services/AppDataContext';
+import { AppDataStorage } from '../../common/services/AppDataStorage';
 
 const CANCEL_BUTTON_BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 const CANCEL_BUTTON_COLOR = new Color('#555', '#EEE');
 
 interface AddMemoryFormProps {
-  memoryStorage?: MemoryStorage;
+  appDataStorage?: AppDataStorage;
 }
 
-export function AddMemoryForm({ memoryStorage = MemoryStorage.getInstance() }: AddMemoryFormProps) {
+export function AddMemoryForm({ appDataStorage = AppDataStorage.getInstance() }: AddMemoryFormProps) {
   const navigation = useNavigation();
-  const { memories, setMemories } = useMemories();
-  const { theme } = useTheme();
-  const styles = getStyles(theme);
+  const { appData, setAppData } = useAppData();
+  const styles = getStyles(appData.theme);
   const [label, setLabel] = React.useState('');
   const [value, setValue] = React.useState('');
   return (
@@ -41,10 +39,11 @@ export function AddMemoryForm({ memoryStorage = MemoryStorage.getInstance() }: A
             mode='contained'
             disabled={!label || !value}
             onPress={() => {
-              const newMemories = [...memories];
-              newMemories.unshift({ id: Date.now() + '', label, value });
-              setMemories(newMemories);
-              memoryStorage.save(newMemories);
+              const memories = [...appData.memories];
+              memories.unshift({ id: Date.now() + '', label, value });
+              const newAppData = { ...appData, memories };
+              setAppData(newAppData);
+              appDataStorage.save(newAppData);
               navigation.navigate(HOME_SCREEN_NAME);
             }}
           >
@@ -52,8 +51,8 @@ export function AddMemoryForm({ memoryStorage = MemoryStorage.getInstance() }: A
           </Button>
           <Button
             mode='contained'
-            labelStyle={{ color: CANCEL_BUTTON_COLOR.get(theme) }}
-            color={CANCEL_BUTTON_BACKGROUND_COLOR.get(theme)}
+            labelStyle={{ color: CANCEL_BUTTON_COLOR.get(appData.theme) }}
+            color={CANCEL_BUTTON_BACKGROUND_COLOR.get(appData.theme)}
             onPress={() => navigation.navigate(HOME_SCREEN_NAME)}
           >
             Cancel

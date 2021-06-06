@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { useTheme } from '../../common/services/ThemeContext';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
 import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, PRIMARY_COLOR } from '../../common/Constants';
 import { Theme } from '../../common/models/Theme';
+import { useAppData } from '../../common/services/AppDataContext';
 
 export default function HomeScreenHeader() {
-  const { theme } = useTheme();
-  const styles = getStyles(theme);
+  const { appData } = useAppData();
+  const styles = getStyles(appData.theme);
 
   return (
     <View style={styles.container}>

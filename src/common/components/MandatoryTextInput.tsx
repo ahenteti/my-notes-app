@@ -3,7 +3,7 @@ import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 import { HelperText } from 'react-native-paper';
 import { Color } from '../models/Color';
 import { Theme } from '../models/Theme';
-import { useTheme } from '../services/ThemeContext';
+import { useAppData } from '../services/AppDataContext';
 import TextInput from './TextInput';
 
 interface MandatoryTextInputProps {
@@ -14,8 +14,8 @@ interface MandatoryTextInputProps {
 }
 
 export default function MandatoryTextInput(props: MandatoryTextInputProps) {
-  const { theme } = useTheme();
-  const styles = getStyles(theme);
+  const { appData } = useAppData();
+  const styles = getStyles(appData.theme);
   const [focused, setFocused] = useState(false);
   return (
     <>
