@@ -7,18 +7,17 @@ import MandatoryTextInput from '../../common/components/MandatoryTextInput';
 import { BODY_BACKGROUND_COLOR, HOME_SCREEN_NAME, TEXT_COLOR } from '../../common/Constants';
 import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
-import { useAppData } from '../../common/services/AppDataContext';
-import { AppDataStorage } from '../../common/services/AppDataStorage';
-import TextInput from '../../common/components/TextInput';
+import { useAppData } from '../../common/services/AppDataReactContext';
+import { AppDataRepository } from '../../common/services/AppDataRepository';
 
 const CANCEL_BUTTON_BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 const CANCEL_BUTTON_COLOR = new Color('#555', '#EEE');
 
 interface AddMemoryFormProps {
-  appDataStorage?: AppDataStorage;
+  appDataRepository?: AppDataRepository;
 }
 
-export function AddMemoryForm({ appDataStorage = AppDataStorage.getInstance() }: AddMemoryFormProps) {
+export function AddMemoryForm({ appDataRepository = AppDataRepository.getInstance() }: AddMemoryFormProps) {
   const navigation = useNavigation();
   const { appData, setAppData } = useAppData();
   const styles = getStyles(appData.theme);
@@ -33,7 +32,7 @@ export function AddMemoryForm({ appDataStorage = AppDataStorage.getInstance() }:
     memories.unshift({ id: Date.now() + '', label, value });
     const newAppData = { ...appData, memories };
     setAppData(newAppData);
-    appDataStorage.save(newAppData);
+    appDataRepository.save(newAppData);
     navigation.navigate(HOME_SCREEN_NAME);
   };
   return (

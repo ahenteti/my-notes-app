@@ -6,14 +6,14 @@ import { Theme } from '../../common/models/Theme';
 import AddMemoryButton from './AddMemoryButton';
 import { useNavigation } from '@react-navigation/native';
 import SwipeToDeleteInfo from './SwipeToDeleteInfo';
-import { useAppData } from '../../common/services/AppDataContext';
-import { AppDataStorage } from '../../common/services/AppDataStorage';
+import { useAppData } from '../../common/services/AppDataReactContext';
+import { AppDataRepository } from '../../common/services/AppDataRepository';
 
 interface MemoriesProps {
-  appDataStorage?: AppDataStorage;
+  appDataRepository?: AppDataRepository;
 }
 
-export default function Memories({ appDataStorage = AppDataStorage.getInstance() }: MemoriesProps) {
+export default function Memories({ appDataRepository = AppDataRepository.getInstance() }: MemoriesProps) {
   const { appData, setAppData } = useAppData();
   const styles = getStyles(appData.theme);
   const navigation = useNavigation();
@@ -41,7 +41,7 @@ export default function Memories({ appDataStorage = AppDataStorage.getInstance()
     memories.splice(index, 1);
     const newAppData = { ...appData, memories, swipeToDeleteMemoryInfoAlreadyShown: true };
     setAppData(newAppData);
-    appDataStorage.save(newAppData);
+    appDataRepository.save(newAppData);
   }
 }
 

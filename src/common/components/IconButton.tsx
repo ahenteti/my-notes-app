@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableHighlight } from 'react-native';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 import { Color } from '../models/Color';
-import { useAppData } from '../services/AppDataContext';
+import { useAppData } from '../services/AppDataReactContext';
 
 export const ICON_COLOR = new Color('#444', '#CCC');
 

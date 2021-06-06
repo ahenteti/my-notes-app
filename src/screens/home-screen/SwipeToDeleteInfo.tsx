@@ -6,21 +6,21 @@ import { Button } from 'react-native-paper';
 import { PRIMARY_COLOR } from '../../common/Constants';
 import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
-import { useAppData } from '../../common/services/AppDataContext';
-import { AppDataStorage } from '../../common/services/AppDataStorage';
+import { useAppData } from '../../common/services/AppDataReactContext';
+import { AppDataRepository } from '../../common/services/AppDataRepository';
 
 interface SwipeToDeleteInfoProps {
-  appDataStorage?: AppDataStorage;
+  appDataRepository?: AppDataRepository;
 }
 
-export default function SwipeToDeleteInfo({ appDataStorage = AppDataStorage.getInstance() }: SwipeToDeleteInfoProps) {
+export default function SwipeToDeleteInfo({ appDataRepository = AppDataRepository.getInstance() }: SwipeToDeleteInfoProps) {
   const { appData, setAppData } = useAppData();
   const styles = getStyles(appData.theme);
 
   const hide = () => {
     const newAppData = { ...appData, swipeToDeleteMemoryInfoAlreadyShown: true };
     setAppData(newAppData);
-    appDataStorage.save(newAppData);
+    appDataRepository.save(newAppData);
   };
   return (
     <View style={styles.container}>

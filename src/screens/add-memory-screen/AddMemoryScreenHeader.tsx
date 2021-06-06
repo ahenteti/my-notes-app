@@ -6,7 +6,7 @@ import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, HOME_SCREEN_NAME } from '../../
 import { useNavigation } from '@react-navigation/native';
 import IconButton from '../../common/components/IconButton';
 import { Theme } from '../../common/models/Theme';
-import { useAppData } from '../../common/services/AppDataContext';
+import { useAppData } from '../../common/services/AppDataReactContext';
 
 const TEXT_COLOR = new Color('#333', '#EEE');
 

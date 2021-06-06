@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
 import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, PRIMARY_COLOR } from '../../common/Constants';
 import { Theme } from '../../common/models/Theme';
-import { useAppData } from '../../common/services/AppDataContext';
+import { useAppData } from '../../common/services/AppDataReactContext';
 
 export default function HomeScreenHeader() {
   const { appData } = useAppData();

@@ -5,7 +5,7 @@ import { Color } from '../../common/models/Color';
 import { ADD_MEMORY_SCREEN_NAME, BODY_BACKGROUND_COLOR, PRIMARY_COLOR } from '../../common/Constants';
 import { Theme } from '../../common/models/Theme';
 import { useNavigation } from '@react-navigation/native';
-import { useAppData } from '../../common/services/AppDataContext';
+import { useAppData } from '../../common/services/AppDataReactContext';
 
 export default function NoMemories() {
   const { appData } = useAppData();

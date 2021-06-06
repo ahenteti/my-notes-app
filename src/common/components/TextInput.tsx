@@ -4,7 +4,7 @@ import { TextInput as PaperInput } from 'react-native-paper';
 import { PRIMARY_COLOR } from '../Constants';
 import { Color } from '../models/Color';
 import { Theme } from '../models/Theme';
-import { useAppData } from '../services/AppDataContext';
+import { useAppData } from '../services/AppDataReactContext';
 
 interface TextInputProps {
   label: string;

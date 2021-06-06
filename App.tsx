@@ -6,21 +6,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AddMemoryScreen from './src/screens/add-memory-screen/AddMemoryScreen';
 import { Provider as ThemePaperProvider } from 'react-native-paper';
 import { DefaultAddData } from './src/common/models/AppData';
-import { AppDataContext } from './src/common/services/AppDataContext';
-import { AppDataStorage } from './src/common/services/AppDataStorage';
+import { AppDataReactContext } from './src/common/services/AppDataReactContext';
+import { AppDataRepository } from './src/common/services/AppDataRepository';
 
 interface AppProps {
-  appDataStorage?: AppDataStorage;
+  appDataRepository?: AppDataRepository;
 }
 
 const Stack = createStackNavigator();
 
-export default function App({ appDataStorage = AppDataStorage.getInstance() }: AppProps) {
+export default function App({ appDataRepository = AppDataRepository.getInstance() }: AppProps) {
   const [appData, setAppData] = React.useState(DefaultAddData);
   useEffect(loadAppDataFromStorage, []);
 
   return (
-    <AppDataContext.Provider value={{ appData, setAppData }}>
+    <AppDataReactContext.Provider value={{ appData, setAppData }}>
       <ThemePaperProvider theme={appData.theme}>
         <NavigationContainer>
           <Stack.Navigator>
@@ -29,10 +29,10 @@ export default function App({ appDataStorage = AppDataStorage.getInstance() }: A
           </Stack.Navigator>
         </NavigationContainer>
       </ThemePaperProvider>
-    </AppDataContext.Provider>
+    </AppDataReactContext.Provider>
   );
 
   function loadAppDataFromStorage() {
-    appDataStorage.get().then(setAppData);
+    appDataRepository.load().then(setAppData);
   }
 }

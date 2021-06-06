@@ -4,7 +4,7 @@ import { GestureEvent, PanGestureHandler } from 'react-native-gesture-handler';
 import { Color } from '../../common/models/Color';
 import { Memory } from '../../common/models/Memory';
 import { Theme } from '../../common/models/Theme';
-import { useAppData } from '../../common/services/AppDataContext';
+import { useAppData } from '../../common/services/AppDataReactContext';
 
 const BACKGROUND_COLOR = new Color('#FFF', '#262A2D');
 const BACKGROUND_COLOR_ON_DELETION_STATE = new Color('#EEE', '#1C1F23');

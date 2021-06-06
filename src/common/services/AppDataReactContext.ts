@@ -1,13 +1,13 @@
 import { createContext, useContext } from 'react';
 import { AppData, DefaultAddData } from '../models/AppData';
 
-export type AppDataContextType = {
+export type AppDataReactContextType = {
   appData: AppData;
   setAppData: (appData: AppData) => void;
 };
 
-export const AppDataContext = createContext<AppDataContextType>({
+export const AppDataReactContext = createContext<AppDataReactContextType>({
   appData: DefaultAddData,
   setAppData: (appData) => console.warn('no appData provider'),
 });
-export const useAppData = () => useContext(AppDataContext);
+export const useAppData = () => useContext(AppDataReactContext);

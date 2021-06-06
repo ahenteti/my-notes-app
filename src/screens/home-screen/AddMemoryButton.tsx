@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
-import { useAppData } from '../../common/services/AppDataContext';
+import { useAppData } from '../../common/services/AppDataReactContext';
 
 interface AddMemoryButtonProps {
   onPress: () => void;
