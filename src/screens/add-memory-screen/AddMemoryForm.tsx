@@ -26,12 +26,8 @@ export function AddMemoryForm({ appDataStorage = AppDataStorage.getInstance() }:
   return (
     <TouchableWithDismissKeyboardCapability>
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <MandatoryTextInput label='Label' value={label} onChange={setLabel}></MandatoryTextInput>
-        </View>
-        <View style={styles.inputContainer}>
-          <MandatoryTextInput label='Value' value={value} onChange={setValue}></MandatoryTextInput>
-        </View>
+        <MandatoryTextInput style={styles.inputContainer} label='Label' value={label} onChange={setLabel}></MandatoryTextInput>
+        <MandatoryTextInput style={styles.inputContainer} label='Value' value={value} onChange={setValue}></MandatoryTextInput>
 
         <View style={styles.buttonsContainer}>
           <Button

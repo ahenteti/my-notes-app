@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleProp, StyleSheet, TextStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle, View } from 'react-native';
 import { HelperText } from 'react-native-paper';
 import { Color } from '../models/Color';
 import { Theme } from '../models/Theme';
@@ -18,12 +18,12 @@ export default function MandatoryTextInput(props: MandatoryTextInputProps) {
   const styles = getStyles(appData.theme);
   const [focused, setFocused] = useState(false);
   return (
-    <>
+    <View style={props.style}>
       <TextInput label={props.label} value={props.value} onChange={props.onChange} onFocus={() => setFocused(true)}></TextInput>
       <HelperText type='error' visible={props.value == '' && focused} style={styles.helperText}>
         {props.label + ' is mandatory'}
       </HelperText>
-    </>
+    </View>
   );
 }
 
