@@ -9,27 +9,34 @@ import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
 import { AppDataRepository } from '../../common/services/AppDataRepository';
+import { EncryptionService } from '../../common/services/EncryptionService';
 
 const CANCEL_BUTTON_BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 const CANCEL_BUTTON_COLOR = new Color('#555', '#EEE');
 
 interface AddMemoryFormProps {
   appDataRepository?: AppDataRepository;
+  encryptionService?: EncryptionService;
 }
 
-export function AddMemoryForm({ appDataRepository = AppDataRepository.getInstance() }: AddMemoryFormProps) {
+export function AddMemoryForm({
+  appDataRepository = AppDataRepository.getInstance(),
+  encryptionService = EncryptionService.getInstance(),
+}: AddMemoryFormProps) {
   const navigation = useNavigation();
   const { appData, setAppData } = useAppData();
   const styles = getStyles(appData.theme);
   const [label, setLabel] = React.useState('');
   const [value, setValue] = React.useState('');
   const [encryptValue, setEncryptValue] = React.useState(false);
-  const [encryptionKey, setEncryptionKey] = React.useState('');
+  const [salt, setSalt] = React.useState('');
   const toggleEncryptValue = () => setEncryptValue(!encryptValue);
-  const saveButtonIsDisabled = () => (encryptValue ? !label || !value : !label || !value || !encryptionKey);
+  const saveButtonIsDisabled = () => (encryptValue ? !label || !value || !salt : !label || !value);
   const handleSaveButtonClickEvent = () => {
     const memories = [...appData.memories];
-    memories.unshift({ id: Date.now() + '', label, value });
+    const id = Date.now() + '';
+    const updatedValue = encryptValue ? encryptionService.encrypt(salt, value) : value;
+    memories.unshift({ id, label, value: updatedValue });
     const newAppData = { ...appData, memories };
     setAppData(newAppData);
     appDataRepository.save(newAppData);
@@ -44,14 +51,7 @@ export function AddMemoryForm({ appDataRepository = AppDataRepository.getInstanc
           <Text style={styles.encryptValueLabel}>Encrypt Value</Text>
           <Switch value={encryptValue} onValueChange={toggleEncryptValue} />
         </View>
-        {encryptValue ? (
-          <MandatoryTextInput
-            style={styles.inputContainer}
-            label='Encryption Key'
-            value={encryptionKey}
-            onChange={setEncryptionKey}
-          ></MandatoryTextInput>
-        ) : null}
+        {encryptValue ? <MandatoryTextInput style={styles.inputContainer} label='Salt' value={salt} onChange={setSalt}></MandatoryTextInput> : null}
         <View style={styles.buttonsContainer}>
           <Button style={styles.saveButton} mode='contained' disabled={saveButtonIsDisabled()} onPress={handleSaveButtonClickEvent}>
             {'  Save  '}
@@ -90,7 +90,6 @@ const getStyles = (theme: Theme) => {
     encryptValueLabel: {
       color: TEXT_COLOR.get(theme),
       fontSize: 14,
-      fontWeight: 'bold',
     },
     buttonsContainer: {
       marginTop: 40,
