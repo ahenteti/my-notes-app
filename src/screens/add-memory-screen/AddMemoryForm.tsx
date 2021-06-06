@@ -23,6 +23,15 @@ export function AddMemoryForm({ appDataStorage = AppDataStorage.getInstance() }:
   const styles = getStyles(appData.theme);
   const [label, setLabel] = React.useState('');
   const [value, setValue] = React.useState('');
+  const saveButtonIsDisabled = () => !label || !value;
+  const handleSaveButtonClickEvent = () => {
+    const memories = [...appData.memories];
+    memories.unshift({ id: Date.now() + '', label, value });
+    const newAppData = { ...appData, memories };
+    setAppData(newAppData);
+    appDataStorage.save(newAppData);
+    navigation.navigate(HOME_SCREEN_NAME);
+  };
   return (
     <TouchableWithDismissKeyboardCapability>
       <View style={styles.container}>
@@ -30,19 +39,7 @@ export function AddMemoryForm({ appDataStorage = AppDataStorage.getInstance() }:
         <MandatoryTextInput style={styles.inputContainer} label='Value' value={value} onChange={setValue}></MandatoryTextInput>
 
         <View style={styles.buttonsContainer}>
-          <Button
-            style={styles.saveButton}
-            mode='contained'
-            disabled={!label || !value}
-            onPress={() => {
-              const memories = [...appData.memories];
-              memories.unshift({ id: Date.now() + '', label, value });
-              const newAppData = { ...appData, memories };
-              setAppData(newAppData);
-              appDataStorage.save(newAppData);
-              navigation.navigate(HOME_SCREEN_NAME);
-            }}
-          >
+          <Button style={styles.saveButton} mode='contained' disabled={saveButtonIsDisabled()} onPress={handleSaveButtonClickEvent}>
             {'  Save  '}
           </Button>
           <Button

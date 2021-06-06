@@ -33,7 +33,6 @@ const getStyles = (theme: Theme) => {
       color: new Color('#ef233c', '#ef2e55').get(theme),
       marginLeft: -10,
       marginTop: -4,
-      fontStyle: 'italic',
     },
   });
 };
