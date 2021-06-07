@@ -2,25 +2,25 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { View, StatusBar } from 'react-native';
 import SecondaryScreenHeader from '../../common/components/SecondaryScreenHeader';
-import { ADD_MEMORY_SCREEN_NAME, HEADER_HEIGHT } from '../../common/Constants';
-import { AddMemoryForm } from './AddMemoryForm';
+import { CONSULT_NOTE_SCREEN_NAME, HEADER_HEIGHT } from '../../common/Constants';
+import { ConsultNoteForm } from './ConsultNoteForm';
 
-export function AddMemoryScreenComponent() {
+export function ConsultNoteScreenComponent() {
   return (
     <View>
       <StatusBar barStyle='default' />
-      <AddMemoryForm></AddMemoryForm>
+      <ConsultNoteForm></ConsultNoteForm>
     </View>
   );
 }
 
-export default function AddMemoryScreen(Stack = createStackNavigator()) {
+export default function ConsultNoteScreen(Stack = createStackNavigator()) {
   return (
     <Stack.Screen
-      name={ADD_MEMORY_SCREEN_NAME}
-      component={AddMemoryScreenComponent}
+      name={CONSULT_NOTE_SCREEN_NAME}
+      component={ConsultNoteScreenComponent}
       options={{
-        headerTitle: () => <SecondaryScreenHeader name='Add Memory'></SecondaryScreenHeader>,
+        headerTitle: () => <SecondaryScreenHeader name='Consult Note'></SecondaryScreenHeader>,
         headerStyle: {
           height: HEADER_HEIGHT,
         },

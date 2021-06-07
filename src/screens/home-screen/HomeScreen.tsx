@@ -3,15 +3,15 @@ import React from 'react';
 import { StatusBar, View } from 'react-native';
 import { HEADER_HEIGHT, HOME_SCREEN_NAME } from '../../common/Constants';
 import HomeScreenHeader from './HomeScreenHeader';
-import MemoriesView from './MemoriesView';
-import NoMemoriesView from './NoMemoriesView';
+import NotesView from './NotesView';
+import NoNotesView from './NoNotesView';
 
 function HomeScreenComponent() {
   return (
     <View>
       <StatusBar barStyle='default' />
-      <MemoriesView></MemoriesView>
-      <NoMemoriesView></NoMemoriesView>
+      <NotesView></NotesView>
+      <NoNotesView></NoNotesView>
     </View>
   );
 }

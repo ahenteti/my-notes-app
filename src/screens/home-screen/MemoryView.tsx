@@ -2,9 +2,9 @@ import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { StyleSheet, Dimensions, Animated, StyleProp, ViewStyle } from 'react-native';
 import { GestureEvent, PanGestureHandler, TouchableOpacity } from 'react-native-gesture-handler';
-import { CONSULT_MEMORY_SCREEN_NAME } from '../../common/Constants';
+import { CONSULT_NOTE_SCREEN_NAME } from '../../common/Constants';
 import { Color } from '../../common/models/Color';
-import { Memory } from '../../common/models/Memory';
+import { Note } from '../../common/models/Note';
 import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
 
@@ -16,7 +16,7 @@ const DELETE_BUTTON_BACKGROUND_COLOR = new Color('#e5383b', '#e5383b');
 const DELETE_BUTTON_COLOR = new Color('#EEE', '#EEE');
 
 export interface MemoryProps {
-  memory: Memory;
+  memory: Note;
   handleDelete: () => void;
   style?: StyleProp<ViewStyle>;
 }
@@ -83,7 +83,7 @@ export default function MemoryView({ memory, handleDelete: deleteMemory, style }
   };
 
   return (
-    <TouchableOpacity style={style} activeOpacity={0.7} onPress={() => navigation.navigate(CONSULT_MEMORY_SCREEN_NAME, { memory })}>
+    <TouchableOpacity style={style} activeOpacity={0.7} onPress={() => navigation.navigate(CONSULT_NOTE_SCREEN_NAME, { memory })}>
       <PanGestureHandler onGestureEvent={handleMovement} onEnded={handleEndMovement}>
         <Animated.View
           style={[
@@ -175,6 +175,6 @@ const getStyles = (theme: Theme) => {
   });
 };
 
-const formatMemoryValue = (memory: Memory) => {
+const formatMemoryValue = (memory: Note) => {
   return memory.value.replace(/\n/g, ' ');
 };

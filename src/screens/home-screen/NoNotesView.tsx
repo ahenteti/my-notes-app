@@ -2,12 +2,12 @@ import React from 'react';
 import { Dimensions, StyleSheet, Text, SafeAreaView, View } from 'react-native';
 import Svg, { Path, Circle } from 'react-native-svg';
 import { Color } from '../../common/models/Color';
-import { ADD_MEMORY_SCREEN_NAME, BODY_BACKGROUND_COLOR, PRIMARY_COLOR } from '../../common/Constants';
+import { ADD_NOTE_SCREEN_NAME, BODY_BACKGROUND_COLOR, PRIMARY_COLOR } from '../../common/Constants';
 import { Theme } from '../../common/models/Theme';
 import { useNavigation } from '@react-navigation/native';
 import { useAppData } from '../../common/services/AppDataReactContext';
 
-export default function NoMemoriesView() {
+export default function NoNotesView() {
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
   const navigation = useNavigation();
@@ -19,7 +19,7 @@ export default function NoMemoriesView() {
             Click on the <Text style={styles.icon}>+</Text> icon below to add your first memory
           </Text>
           <Svg
-            onPress={() => navigation.navigate(ADD_MEMORY_SCREEN_NAME)}
+            onPress={() => navigation.navigate(ADD_NOTE_SCREEN_NAME)}
             style={styles.svg}
             data-name='Layer 1'
             xmlns='http://www.w3.org/2000/svg'

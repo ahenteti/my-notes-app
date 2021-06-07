@@ -11,11 +11,11 @@ import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
 import { EncryptionService } from '../../common/services/EncryptionService';
 
-interface ConsultMemoryFormProps {
+interface ConsultNoteFormProps {
   encryptionService?: EncryptionService;
 }
 
-export function ConsultMemoryForm({ encryptionService = EncryptionService.getInstance() }: ConsultMemoryFormProps) {
+export function ConsultNoteForm({ encryptionService = EncryptionService.getInstance() }: ConsultNoteFormProps) {
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
   const route = useRoute();

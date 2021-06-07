@@ -5,11 +5,11 @@ import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
 
-interface AddMemoryButtonProps {
+interface AddNoteFABProps {
   onPress: () => void;
 }
 
-export default function AddMemoryButton({ onPress }: AddMemoryButtonProps) {
+export default function AddNoteFAB({ onPress }: AddNoteFABProps) {
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
   return (

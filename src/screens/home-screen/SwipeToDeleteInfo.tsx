@@ -27,7 +27,7 @@ export default function SwipeToDeleteInfo({ appDataRepository = AppDataRepositor
       <TouchableWithoutFeedback onPress={hide} style={styles.touchable}>
         <View style={styles.hintContainer}>
           <Entypo name='info-with-circle' style={styles.infoIcon} />
-          <Text style={styles.infoText}>Swipe to the left your memory if you want to delete it</Text>
+          <Text style={styles.infoText}>Swipe to the left your note if you want to delete it</Text>
         </View>
         <MaterialCommunityIcons name='gesture-swipe-right' size={180} color={new Color('#ddb892', '#b08968').get(appData.theme)} />
         <Button mode='contained' style={styles.doneIcon}>
@@ -42,7 +42,7 @@ function getStyles(theme: Theme) {
   return StyleSheet.create({
     container: {
       position: 'absolute',
-      top: 150,
+      top: 180,
       width: Dimensions.get('window').width,
     },
     touchable: {

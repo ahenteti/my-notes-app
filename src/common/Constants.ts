@@ -1,8 +1,8 @@
 import { Color } from './models/Color';
 
 export const HOME_SCREEN_NAME = 'Home';
-export const ADD_MEMORY_SCREEN_NAME = 'Add Memory';
-export const CONSULT_MEMORY_SCREEN_NAME = 'Consult Memory';
+export const ADD_NOTE_SCREEN_NAME = 'Add Note';
+export const CONSULT_NOTE_SCREEN_NAME = 'Consult Note';
 
 export const HEADER_HEIGHT = 55;
 export const HEADER_BACKGROUND_COLOR = new Color('#FFF', '#262A2D');

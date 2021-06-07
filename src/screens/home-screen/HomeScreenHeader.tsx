@@ -13,7 +13,7 @@ export default function HomeScreenHeader() {
     <View style={styles.container}>
       <View style={styles.left}>
         <Image style={styles.image} source={require('../../../assets/logo.png')} />
-        <Text style={styles.text}>My Memory</Text>
+        <Text style={styles.text}>My Notes</Text>
       </View>
       <ToggleThemeButton></ToggleThemeButton>
     </View>

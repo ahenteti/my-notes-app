@@ -1,8 +1,8 @@
-import { Memory } from './Memory';
+import { Note } from './Note';
 import { Theme } from './Theme';
 
 export interface AppData {
-  memories: Memory[];
+  memories: Note[];
   theme: Theme;
   swipeToDeleteMemoryInfoAlreadyShown: boolean;
 }

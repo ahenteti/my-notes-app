@@ -1,4 +1,4 @@
-export interface Memory {
+export interface Note {
   id: string;
   label: string;
   value: string;

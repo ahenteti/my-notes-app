@@ -5,7 +5,7 @@ import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
 import { FontAwesome5, Octicons } from '@expo/vector-icons';
 
-interface SearchMemoriesInputProps {
+interface SearchInputProps {
   text: string;
   onChangeText: (text: string) => void;
   style?: StyleProp<TextStyle>;
@@ -15,7 +15,7 @@ const TEXT_COLOR = new Color('#333', '#EEE');
 const PLACEHOLDER_COLOR = new Color('#888', '#888');
 const BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 
-export default function SearchMemoriesInput(props: SearchMemoriesInputProps) {
+export default function SearchInput(props: SearchInputProps) {
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
   const deleteSearchText = () => {

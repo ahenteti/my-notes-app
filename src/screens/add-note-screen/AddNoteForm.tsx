@@ -14,15 +14,15 @@ import { EncryptionService } from '../../common/services/EncryptionService';
 const CANCEL_BUTTON_BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 const CANCEL_BUTTON_COLOR = new Color('#555', '#EEE');
 
-interface AddMemoryFormProps {
+interface AddNoteFormProps {
   appDataRepository?: AppDataRepository;
   encryptionService?: EncryptionService;
 }
 
-export function AddMemoryForm({
+export function AddNoteForm({
   appDataRepository = AppDataRepository.getInstance(),
   encryptionService = EncryptionService.getInstance(),
-}: AddMemoryFormProps) {
+}: AddNoteFormProps) {
   const navigation = useNavigation();
   const { appData, setAppData } = useAppData();
   const styles = getStyles(appData.theme);
