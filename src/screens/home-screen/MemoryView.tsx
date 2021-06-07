@@ -34,6 +34,7 @@ export default function MemoryView({ memory, handleDelete: deleteMemory }: Memor
 
   const label = memory.label;
   const value = formatMemoryValue(memory);
+  const isEncrypted = memory.isEncrypted;
   const windowWidth = Dimensions.get('window').width;
   const translateX = new Animated.Value(0);
   const opacity = new Animated.Value(1);
@@ -89,7 +90,10 @@ export default function MemoryView({ memory, handleDelete: deleteMemory }: Memor
             { transform: [{ translateX: translateX }], opacity: opacity, backgroundColor: backgroundColor, height: height, padding: padding },
           ]}
         >
-          <Animated.Text style={[styles.label, { fontSize: labelFontSize }]}>{label}</Animated.Text>
+          <Animated.View style={styles.labelContainer}>
+            <Animated.Text style={[styles.label, { fontSize: labelFontSize }]}>{label}</Animated.Text>
+            {isEncrypted ? <Animated.Text style={[styles.isEncrypted]}>Encrypted</Animated.Text> : null}
+          </Animated.View>
           <Animated.Text style={[styles.value, { fontSize: valueFontSize }]} numberOfLines={1}>
             {value}
           </Animated.Text>
@@ -125,12 +129,29 @@ const getStyles = (theme: Theme) => {
       borderRadius: 3,
       height: 75,
     },
+    labelContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
     label: {
       color: LABEL_COLOR.get(theme),
       fontSize: LABEL_FONT_SIZE_INIT_VALUE,
       fontFamily: 'Roboto',
       fontWeight: 'bold',
       paddingBottom: 4,
+    },
+    isEncrypted: {
+      marginTop: -8,
+      marginRight: -3,
+      padding: 3,
+      paddingLeft: 9,
+      paddingRight: 9,
+      borderRadius: 100,
+      fontSize: 12,
+      color: 'white',
+      backgroundColor: '#e62532',
     },
     value: {
       color: VALUE_COLOR.get(theme),

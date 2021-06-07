@@ -30,13 +30,17 @@ export function ConsultMemoryForm({ encryptionService = EncryptionService.getIns
         {salt ? null : <TextOutput style={styles.output} label='Value' value={memory.value}></TextOutput>}
         {!salt ? null : <TextOutput style={styles.output} label='Value' value={encryptionService.decrypt(salt, memory.value)}></TextOutput>}
 
-        <View style={styles.decryptValueContainer}>
-          <Text style={styles.decryptValueLabel}>Decrypt Value</Text>
-          <Switch value={decryptValue} onValueChange={toggleDecryptValue} />
-        </View>
-        {!decryptValue ? null : (
+        {!memory.isEncrypted ? null : (
           <View>
-            <TextInput style={styles.input} label='Salt' value={salt} onChange={setSalt}></TextInput>
+            <View style={styles.decryptValueContainer}>
+              <Text style={styles.decryptValueLabel}>Decrypt Value</Text>
+              <Switch value={decryptValue} onValueChange={toggleDecryptValue} />
+            </View>
+            {!decryptValue ? null : (
+              <View>
+                <TextInput style={styles.input} label='Salt' value={salt} onChange={setSalt}></TextInput>
+              </View>
+            )}
           </View>
         )}
       </ScrollView>
