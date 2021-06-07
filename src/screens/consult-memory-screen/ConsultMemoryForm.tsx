@@ -1,12 +1,12 @@
 import { useRoute } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { Switch } from 'react-native-paper';
 import TextInput from '../../common/components/TextInput';
 import TextOutput from '../../common/components/TextOutput';
 import { TouchableWithDismissKeyboardCapability } from '../../common/components/TouchableWithDismissKeyboardCapability';
 import { BODY_BACKGROUND_COLOR, TEXT_COLOR } from '../../common/Constants';
-import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
 import { EncryptionService } from '../../common/services/EncryptionService';
@@ -25,7 +25,7 @@ export function ConsultMemoryForm({ encryptionService = EncryptionService.getIns
   const toggleDecryptValue = () => setDecryptValue(!decryptValue);
   return (
     <TouchableWithDismissKeyboardCapability>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <TextOutput style={styles.output} label='Label' value={memory.label}></TextOutput>
         {salt ? null : <TextOutput style={styles.output} label='Value' value={memory.value}></TextOutput>}
         {!salt ? null : <TextOutput style={styles.output} label='Value' value={encryptionService.decrypt(salt, memory.value)}></TextOutput>}
@@ -39,7 +39,7 @@ export function ConsultMemoryForm({ encryptionService = EncryptionService.getIns
             <TextInput style={styles.input} label='Salt' value={salt} onChange={setSalt}></TextInput>
           </View>
         )}
-      </View>
+      </ScrollView>
     </TouchableWithDismissKeyboardCapability>
   );
 }

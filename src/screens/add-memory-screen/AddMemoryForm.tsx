@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { Button, Switch } from 'react-native-paper';
 import { TouchableWithDismissKeyboardCapability } from '../../common/components/TouchableWithDismissKeyboardCapability';
 import MandatoryTextInput from '../../common/components/MandatoryTextInput';
@@ -44,7 +44,7 @@ export function AddMemoryForm({
   };
   return (
     <TouchableWithDismissKeyboardCapability>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <MandatoryTextInput style={styles.inputContainer} label='Label' value={label} onChange={setLabel}></MandatoryTextInput>
         <MandatoryTextInput style={styles.inputContainer} label='Value' value={value} onChange={setValue} multiline={true}></MandatoryTextInput>
         <View style={styles.encryptValueContainer}>
@@ -65,7 +65,7 @@ export function AddMemoryForm({
             Cancel
           </Button>
         </View>
-      </View>
+      </ScrollView>
     </TouchableWithDismissKeyboardCapability>
   );
 }
