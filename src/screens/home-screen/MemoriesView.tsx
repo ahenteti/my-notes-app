@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, FlatList, SafeAreaView, View, Text } from 'react-native';
-import MemoryCard from './Memory';
+import MemoryView from './MemoryView';
 import { ADD_MEMORY_SCREEN_NAME, BODY_BACKGROUND_COLOR } from '../../common/Constants';
 import { Theme } from '../../common/models/Theme';
 import AddMemoryButton from './AddMemoryButton';
@@ -13,7 +13,7 @@ interface MemoriesProps {
   appDataRepository?: AppDataRepository;
 }
 
-export default function Memories({ appDataRepository = AppDataRepository.getInstance() }: MemoriesProps) {
+export default function MemoriesView({ appDataRepository = AppDataRepository.getInstance() }: MemoriesProps) {
   const { appData, setAppData } = useAppData();
   const styles = getStyles(appData.theme);
   const navigation = useNavigation();
@@ -25,7 +25,7 @@ export default function Memories({ appDataRepository = AppDataRepository.getInst
           <FlatList
             data={appData.memories}
             renderItem={({ item, index }) => {
-              return <MemoryCard memory={item} handleDelete={() => deleteMemory(index)}></MemoryCard>;
+              return <MemoryView memory={item} handleDelete={() => deleteMemory(index)}></MemoryView>;
             }}
           />
           {appData.swipeToDeleteMemoryInfoAlreadyShown ? null : <SwipeToDeleteInfo></SwipeToDeleteInfo>}

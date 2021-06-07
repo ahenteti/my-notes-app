@@ -27,7 +27,7 @@ const PADDING_INIT_VALUE = 15;
 const LABEL_FONT_SIZE_INIT_VALUE = 18;
 const VALUE_FONT_SIZE_INIT_VALUE = 13;
 
-export default function MemoryCard({ memory, handleDelete: deleteMemory }: MemoryProps) {
+export default function MemoryView({ memory, handleDelete: deleteMemory }: MemoryProps) {
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
   const navigation = useNavigation();

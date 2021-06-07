@@ -7,7 +7,7 @@ import { Theme } from '../../common/models/Theme';
 import { useNavigation } from '@react-navigation/native';
 import { useAppData } from '../../common/services/AppDataReactContext';
 
-export default function NoMemories() {
+export default function NoMemoriesView() {
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
   const navigation = useNavigation();
