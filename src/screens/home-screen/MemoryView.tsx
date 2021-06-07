@@ -96,7 +96,7 @@ export default function MemoryView({ memory, handleDelete: deleteMemory, style }
             {isEncrypted ? (
               <Animated.View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Animated.Text style={[styles.isEncryptedLabel]}>Encrypted Value</Animated.Text>
-                <Animated.Text> : </Animated.Text>
+                <Animated.Text style={{ color: VALUE_COLOR.get(appData.theme) }}> : </Animated.Text>
               </Animated.View>
             ) : null}
             <Animated.Text style={[styles.value, { fontSize: valueFontSize }]} numberOfLines={1}>

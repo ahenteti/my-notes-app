@@ -27,7 +27,7 @@ export function ConsultMemoryForm({ encryptionService = EncryptionService.getIns
     <TouchableWithDismissKeyboardCapability>
       <ScrollView style={styles.container}>
         <TextOutput style={styles.output} label='Label' value={memory.label}></TextOutput>
-        {salt ? null : <TextOutput style={styles.output} label='Value' value={memory.value}></TextOutput>}
+        {salt ? null : <TextOutput style={styles.output} label='Decrypted Value' value={memory.value}></TextOutput>}
         {!salt ? null : <TextOutput style={styles.output} label='Value' value={encryptionService.decrypt(salt, memory.value)}></TextOutput>}
 
         {!memory.isEncrypted ? null : (
