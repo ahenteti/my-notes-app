@@ -1,16 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Color } from '../../common/models/Color';
-import ToggleThemeButton from '../../common/components/ToggleThemeButton';
-import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, HOME_SCREEN_NAME } from '../../common/Constants';
+import { Color } from '../models/Color';
+import ToggleThemeButton from './ToggleThemeButton';
+import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, HOME_SCREEN_NAME } from '../Constants';
 import { useNavigation } from '@react-navigation/native';
-import IconButton from '../../common/components/IconButton';
-import { Theme } from '../../common/models/Theme';
-import { useAppData } from '../../common/services/AppDataReactContext';
+import IconButton from './IconButton';
+import { Theme } from '../models/Theme';
+import { useAppData } from '../services/AppDataReactContext';
 
 const TEXT_COLOR = new Color('#333', '#EEE');
 
-export default function AddMemoryScreenHeader() {
+interface SecondaryScreenHeaderProps {
+  name: string;
+}
+
+export default function SecondaryScreenHeader(props: SecondaryScreenHeaderProps) {
   const navigation = useNavigation();
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
@@ -19,7 +23,7 @@ export default function AddMemoryScreenHeader() {
     <View style={styles.container}>
       <View style={styles.left}>
         <IconButton name='arrow-back' size={28} onPress={() => navigation.navigate(HOME_SCREEN_NAME)} />
-        <Text style={styles.text}>New Memory</Text>
+        <Text style={styles.text}>{props.name}</Text>
       </View>
       <ToggleThemeButton></ToggleThemeButton>
     </View>
