@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { StyleSheet, Dimensions, Animated } from 'react-native';
-import { GestureEvent, PanGestureHandler, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { GestureEvent, PanGestureHandler, TouchableOpacity } from 'react-native-gesture-handler';
 import { CONSULT_MEMORY_SCREEN_NAME } from '../../common/Constants';
 import { Color } from '../../common/models/Color';
 import { Memory } from '../../common/models/Memory';
@@ -32,6 +32,8 @@ export default function MemoryCard({ memory, handleDelete: deleteMemory }: Memor
   const styles = getStyles(appData.theme);
   const navigation = useNavigation();
 
+  const label = memory.label;
+  const value = formatMemoryValue(memory);
   const windowWidth = Dimensions.get('window').width;
   const translateX = new Animated.Value(0);
   const opacity = new Animated.Value(1);
@@ -87,8 +89,10 @@ export default function MemoryCard({ memory, handleDelete: deleteMemory }: Memor
             { transform: [{ translateX: translateX }], opacity: opacity, backgroundColor: backgroundColor, height: height, padding: padding },
           ]}
         >
-          <Animated.Text style={[styles.label, { fontSize: labelFontSize }]}>{memory.label}</Animated.Text>
-          <Animated.Text style={[styles.value, { fontSize: valueFontSize }]}>{memory.value}</Animated.Text>
+          <Animated.Text style={[styles.label, { fontSize: labelFontSize }]}>{label}</Animated.Text>
+          <Animated.Text style={[styles.value, { fontSize: valueFontSize }]} numberOfLines={1}>
+            {value}
+          </Animated.Text>
         </Animated.View>
       </PanGestureHandler>
     </TouchableOpacity>
@@ -149,4 +153,8 @@ const getStyles = (theme: Theme) => {
       padding: 10,
     },
   });
+};
+
+const formatMemoryValue = (memory: Memory) => {
+  return memory.value.replace(/\n/g, ' ');
 };
