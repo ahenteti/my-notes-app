@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
-import { StyleSheet, Dimensions, Animated } from 'react-native';
+import { StyleSheet, Dimensions, Animated, StyleProp, ViewStyle } from 'react-native';
 import { GestureEvent, PanGestureHandler, TouchableOpacity } from 'react-native-gesture-handler';
 import { CONSULT_MEMORY_SCREEN_NAME } from '../../common/Constants';
 import { Color } from '../../common/models/Color';
@@ -18,6 +18,7 @@ const DELETE_BUTTON_COLOR = new Color('#EEE', '#EEE');
 export interface MemoryProps {
   memory: Memory;
   handleDelete: () => void;
+  style?: StyleProp<ViewStyle>;
 }
 
 const ANIMATION_DURATION = 250;
@@ -27,7 +28,7 @@ const PADDING_INIT_VALUE = 15;
 const LABEL_FONT_SIZE_INIT_VALUE = 18;
 const VALUE_FONT_SIZE_INIT_VALUE = 13;
 
-export default function MemoryView({ memory, handleDelete: deleteMemory }: MemoryProps) {
+export default function MemoryView({ memory, handleDelete: deleteMemory, style }: MemoryProps) {
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
   const navigation = useNavigation();
@@ -82,7 +83,7 @@ export default function MemoryView({ memory, handleDelete: deleteMemory }: Memor
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate(CONSULT_MEMORY_SCREEN_NAME, { memory })}>
+    <TouchableOpacity style={style} activeOpacity={0.7} onPress={() => navigation.navigate(CONSULT_MEMORY_SCREEN_NAME, { memory })}>
       <PanGestureHandler onGestureEvent={handleMovement} onEnded={handleEndMovement}>
         <Animated.View
           style={[
@@ -124,8 +125,6 @@ const getStyles = (theme: Theme) => {
     container: {
       backgroundColor: BACKGROUND_COLOR.get(theme),
       padding: PADDING_INIT_VALUE,
-      margin: 10,
-      marginBottom: 0,
       borderRadius: 3,
       height: 75,
     },
