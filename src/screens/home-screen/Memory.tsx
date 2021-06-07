@@ -1,6 +1,8 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { StyleSheet, Dimensions, Animated } from 'react-native';
-import { GestureEvent, PanGestureHandler } from 'react-native-gesture-handler';
+import { GestureEvent, PanGestureHandler, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { CONSULT_MEMORY_SCREEN_NAME } from '../../common/Constants';
 import { Color } from '../../common/models/Color';
 import { Memory } from '../../common/models/Memory';
 import { Theme } from '../../common/models/Theme';
@@ -28,6 +30,7 @@ const VALUE_FONT_SIZE_INIT_VALUE = 13;
 export default function MemoryCard({ memory, handleDelete: deleteMemory }: MemoryProps) {
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
+  const navigation = useNavigation();
 
   const windowWidth = Dimensions.get('window').width;
   const translateX = new Animated.Value(0);
@@ -76,17 +79,19 @@ export default function MemoryCard({ memory, handleDelete: deleteMemory }: Memor
   };
 
   return (
-    <PanGestureHandler onGestureEvent={handleMovement} onEnded={handleEndMovement}>
-      <Animated.View
-        style={[
-          styles.container,
-          { transform: [{ translateX: translateX }], opacity: opacity, backgroundColor: backgroundColor, height: height, padding: padding },
-        ]}
-      >
-        <Animated.Text style={[styles.label, { fontSize: labelFontSize }]}>{memory.label}</Animated.Text>
-        <Animated.Text style={[styles.value, { fontSize: valueFontSize }]}>{memory.value}</Animated.Text>
-      </Animated.View>
-    </PanGestureHandler>
+    <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate(CONSULT_MEMORY_SCREEN_NAME, { memory })}>
+      <PanGestureHandler onGestureEvent={handleMovement} onEnded={handleEndMovement}>
+        <Animated.View
+          style={[
+            styles.container,
+            { transform: [{ translateX: translateX }], opacity: opacity, backgroundColor: backgroundColor, height: height, padding: padding },
+          ]}
+        >
+          <Animated.Text style={[styles.label, { fontSize: labelFontSize }]}>{memory.label}</Animated.Text>
+          <Animated.Text style={[styles.value, { fontSize: valueFontSize }]}>{memory.value}</Animated.Text>
+        </Animated.View>
+      </PanGestureHandler>
+    </TouchableOpacity>
   );
 }
 

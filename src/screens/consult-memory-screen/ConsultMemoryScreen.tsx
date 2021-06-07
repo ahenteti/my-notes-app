@@ -3,11 +3,13 @@ import React from 'react';
 import { View, StatusBar } from 'react-native';
 import SecondaryScreenHeader from '../../common/components/SecondaryScreenHeader';
 import { CONSULT_MEMORY_SCREEN_NAME, HEADER_HEIGHT } from '../../common/Constants';
+import { ConsultMemoryForm } from './ConsultMemoryForm';
 
 export function ConsultMemoryScreenComponent() {
   return (
     <View>
       <StatusBar barStyle='default' />
+      <ConsultMemoryForm></ConsultMemoryForm>
     </View>
   );
 }

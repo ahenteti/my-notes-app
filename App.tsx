@@ -4,6 +4,7 @@ import HomeScreen from './src/screens/home-screen/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddMemoryScreen from './src/screens/add-memory-screen/AddMemoryScreen';
+import ConsultMemoryScreen from './src/screens/consult-memory-screen/ConsultMemoryScreen';
 import { Provider as ThemePaperProvider } from 'react-native-paper';
 import { DefaultAddData } from './src/common/models/AppData';
 import { AppDataReactContext } from './src/common/services/AppDataReactContext';
@@ -26,6 +27,7 @@ export default function App({ appDataRepository = AppDataRepository.getInstance(
           <Stack.Navigator>
             {HomeScreen(Stack)}
             {AddMemoryScreen(Stack)}
+            {ConsultMemoryScreen(Stack)}
           </Stack.Navigator>
         </NavigationContainer>
       </ThemePaperProvider>

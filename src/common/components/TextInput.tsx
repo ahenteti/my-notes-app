@@ -16,7 +16,7 @@ interface TextInputProps {
 
 const TEXT_COLOR = new Color('#333', '#EEE');
 const PLACEHOLDER_COLOR = new Color('#1e96fc', '#1e96fc');
-const PLACEHOLDER_COLOR_ON_EMPTY_INPUT = new Color('#555', '#AAA');
+const PLACEHOLDER_COLOR_ON_EMPTY_INPUT = new Color('#888', '#888');
 const BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 
 export default function TextInput(props: TextInputProps) {
