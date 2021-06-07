@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "My Memory",
-    "slug": "my-memory",
-    "version": "1.0.9",
+    "name": "My Notes",
+    "slug": "my-notes-app",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.github.ahenteti.mymemory"
+      "package": "com.github.ahenteti.mynotesapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

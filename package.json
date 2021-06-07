@@ -1,5 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "description": "Mobile app to save and encrypt your notes in your phone without external storage",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
