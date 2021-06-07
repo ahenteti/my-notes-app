@@ -91,13 +91,18 @@ export default function MemoryView({ memory, handleDelete: deleteMemory, style }
             { transform: [{ translateX: translateX }], opacity: opacity, backgroundColor: backgroundColor, height: height, padding: padding },
           ]}
         >
-          <Animated.View style={styles.labelContainer}>
-            <Animated.Text style={[styles.label, { fontSize: labelFontSize }]}>{label}</Animated.Text>
-            {isEncrypted ? <Animated.Text style={[styles.isEncrypted]}>Encrypted</Animated.Text> : null}
+          <Animated.Text style={[styles.label, { fontSize: labelFontSize }]}>{label}</Animated.Text>
+          <Animated.View style={styles.valueContainer}>
+            {isEncrypted ? (
+              <Animated.View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Animated.Text style={[styles.isEncryptedLabel]}>Encrypted Value</Animated.Text>
+                <Animated.Text> : </Animated.Text>
+              </Animated.View>
+            ) : null}
+            <Animated.Text style={[styles.value, { fontSize: valueFontSize }]} numberOfLines={1}>
+              {value}
+            </Animated.Text>
           </Animated.View>
-          <Animated.Text style={[styles.value, { fontSize: valueFontSize }]} numberOfLines={1}>
-            {value}
-          </Animated.Text>
         </Animated.View>
       </PanGestureHandler>
     </TouchableOpacity>
@@ -128,12 +133,6 @@ const getStyles = (theme: Theme) => {
       borderRadius: 3,
       height: 75,
     },
-    labelContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
     label: {
       color: LABEL_COLOR.get(theme),
       fontSize: LABEL_FONT_SIZE_INIT_VALUE,
@@ -141,18 +140,19 @@ const getStyles = (theme: Theme) => {
       fontWeight: 'bold',
       paddingBottom: 4,
     },
-    isEncrypted: {
-      marginTop: -8,
-      marginRight: -3,
-      padding: 3,
-      paddingLeft: 9,
-      paddingRight: 9,
-      borderRadius: 100,
+    valueContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    isEncryptedLabel: {
       fontSize: 12,
-      color: 'white',
-      backgroundColor: '#e62532',
+      color: VALUE_COLOR.get(theme),
+      fontWeight: 'bold',
+      textDecorationLine: 'underline',
     },
     value: {
+      flex: 1,
       color: VALUE_COLOR.get(theme),
       fontSize: VALUE_FONT_SIZE_INIT_VALUE,
       fontFamily: 'Roboto',
