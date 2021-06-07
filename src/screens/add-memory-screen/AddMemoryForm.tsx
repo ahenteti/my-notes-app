@@ -36,7 +36,7 @@ export function AddMemoryForm({
     const memories = [...appData.memories];
     const id = Date.now() + '';
     const updatedValue = encryptValue ? encryptionService.encrypt(salt, value) : value;
-    memories.unshift({ id, label, value: updatedValue });
+    memories.unshift({ id, label, value: updatedValue, isEncrypted: encryptValue });
     const newAppData = { ...appData, memories };
     setAppData(newAppData);
     appDataRepository.save(newAppData);
