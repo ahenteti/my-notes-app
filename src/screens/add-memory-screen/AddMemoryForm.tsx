@@ -46,7 +46,7 @@ export function AddMemoryForm({
     <TouchableWithDismissKeyboardCapability>
       <View style={styles.container}>
         <MandatoryTextInput style={styles.inputContainer} label='Label' value={label} onChange={setLabel}></MandatoryTextInput>
-        <MandatoryTextInput style={styles.inputContainer} label='Value' value={value} onChange={setValue}></MandatoryTextInput>
+        <MandatoryTextInput style={styles.inputContainer} label='Value' value={value} onChange={setValue} multiline={true}></MandatoryTextInput>
         <View style={styles.encryptValueContainer}>
           <Text style={styles.encryptValueLabel}>Encrypt Value</Text>
           <Switch value={encryptValue} onValueChange={toggleEncryptValue} />

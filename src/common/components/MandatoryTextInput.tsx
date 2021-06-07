@@ -10,6 +10,7 @@ interface MandatoryTextInputProps {
   label: string;
   value: string;
   onChange: (text: string) => void;
+  multiline?: boolean;
   style?: StyleProp<TextStyle>;
 }
 
@@ -19,7 +20,13 @@ export default function MandatoryTextInput(props: MandatoryTextInputProps) {
   const [focused, setFocused] = useState(false);
   return (
     <View style={props.style}>
-      <TextInput label={props.label} value={props.value} onChange={props.onChange} onFocus={() => setFocused(true)}></TextInput>
+      <TextInput
+        multiline={props.multiline}
+        label={props.label}
+        value={props.value}
+        onChange={props.onChange}
+        onFocus={() => setFocused(true)}
+      ></TextInput>
       <HelperText type='error' visible={props.value == '' && focused} style={styles.helperText}>
         {props.label + ' is mandatory'}
       </HelperText>

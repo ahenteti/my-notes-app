@@ -11,6 +11,8 @@ interface TextInputProps {
   value: string;
   onChange: (text: string) => void;
   onFocus?: () => void;
+  multiline?: boolean;
+  numberOfLines?: number;
   style?: StyleProp<TextStyle>;
 }
 
@@ -22,9 +24,13 @@ const BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 export default function TextInput(props: TextInputProps) {
   const { appData } = useAppData();
   const styles = getStyles(appData.theme);
+  const multiline = props.multiline || false;
+  const numberOfLines = props.numberOfLines || 5;
   return (
     <PaperInput
       style={[props.style, styles.input]}
+      multiline={multiline}
+      numberOfLines={numberOfLines}
       theme={{
         colors: {
           primary: PRIMARY_COLOR.get(appData.theme),
