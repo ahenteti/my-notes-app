@@ -27,7 +27,7 @@ export function ConsultNoteForm({ encryptionService = EncryptionService.getInsta
     <TouchableWithDismissKeyboardCapability>
       <ScrollView style={styles.container}>
         <TextOutput style={styles.output} label='Label' value={memory.label}></TextOutput>
-        {salt ? null : <TextOutput style={styles.output} label='Decrypted Value' value={memory.value}></TextOutput>}
+        {salt ? null : <TextOutput style={styles.output} label={decryptValue ? 'Decrypted Value' : 'Value'} value={memory.value}></TextOutput>}
         {!salt ? null : <TextOutput style={styles.output} label='Value' value={encryptionService.decrypt(salt, memory.value)}></TextOutput>}
 
         {!memory.isEncrypted ? null : (
@@ -38,7 +38,7 @@ export function ConsultNoteForm({ encryptionService = EncryptionService.getInsta
             </View>
             {!decryptValue ? null : (
               <View>
-                <TextInput style={styles.input} label='Salt' value={salt} onChange={setSalt}></TextInput>
+                <TextInput style={styles.input} label='Encryption Key' value={salt} onChange={setSalt}></TextInput>
               </View>
             )}
           </View>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import ToggleThemeButton from '../../common/components/ToggleThemeButton';
-import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, PRIMARY_COLOR } from '../../common/Constants';
+import { HEADER_BACKGROUND_COLOR, HEADER_HEIGHT, TEXT_COLOR } from '../../common/Constants';
 import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
 
@@ -38,11 +38,11 @@ const getStyles = (theme: Theme) => {
       alignItems: 'center',
     },
     text: {
-      color: PRIMARY_COLOR.get(theme),
+      color: TEXT_COLOR.get(theme),
       fontSize: 20,
       fontFamily: 'Roboto',
       fontWeight: 'bold',
-      paddingLeft: 12,
+      paddingLeft: 15,
     },
     image: {
       width: 25,

@@ -16,7 +16,7 @@ export default function NoNotesView() {
       {appData.memories.length > 0 ? null : (
         <SafeAreaView style={styles.container}>
           <Text style={styles.label}>
-            Click on the <Text style={styles.icon}>+</Text> icon below to add your first memory
+            Click on the <Text style={styles.icon}>+</Text> icon below to add your first note
           </Text>
           <Svg
             onPress={() => navigation.navigate(ADD_NOTE_SCREEN_NAME)}
@@ -47,7 +47,7 @@ export default function NoNotesView() {
               d='M654.66 123.846H278.34a34.31 34.31 0 00-34.27 34.27v441.877a34.31 34.31 0 0034.27 34.27h376.32a34.31 34.31 0 0034.27-34.27V158.117a34.31 34.31 0 00-34.27-34.271z'
               fill={new Color('#fff', '#1C1F23').get(appData.theme)}
             />
-            <Circle cx={694.194} cy={614.03} r={87.85} fill='#1e96fc' />
+            <Circle cx={694.194} cy={614.03} r={87.85} fill={PRIMARY_COLOR.get(appData.theme)} />
             <Path
               d='M736.21 602.57h-30.557v-30.556a11.459 11.459 0 00-22.918 0v30.557H652.18a11.459 11.459 0 000 22.917h30.556v30.557a11.459 11.459 0 1022.918 0v-30.557h30.556a11.459 11.459 0 000-22.917z'
               fill={new Color('#fff', '#1C1F23').get(appData.theme)}
@@ -62,7 +62,7 @@ export default function NoNotesView() {
             />
             <Path
               d='M426.881 291.547H297.535a3.847 3.847 0 01-3.842-3.843V186.757a3.847 3.847 0 013.842-3.843h129.346a3.847 3.847 0 013.843 3.843v100.947a3.847 3.847 0 01-3.843 3.843z'
-              fill={new Color('#1e96fc', '#1e96fc').get(appData.theme)}
+              fill={PRIMARY_COLOR.get(appData.theme)}
             />
           </Svg>
         </SafeAreaView>

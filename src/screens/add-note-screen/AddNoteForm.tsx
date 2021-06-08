@@ -51,7 +51,9 @@ export function AddNoteForm({
           <Text style={styles.encryptValueLabel}>Encrypt Value</Text>
           <Switch value={encryptValue} onValueChange={toggleEncryptValue} />
         </View>
-        {encryptValue ? <MandatoryTextInput style={styles.inputContainer} label='Salt' value={salt} onChange={setSalt}></MandatoryTextInput> : null}
+        {encryptValue ? (
+          <MandatoryTextInput style={styles.inputContainer} label='Encryption Key' value={salt} onChange={setSalt}></MandatoryTextInput>
+        ) : null}
         <View style={styles.buttonsContainer}>
           <Button style={styles.saveButton} mode='contained' disabled={saveButtonIsDisabled()} onPress={handleSaveButtonClickEvent}>
             {'  Save  '}
