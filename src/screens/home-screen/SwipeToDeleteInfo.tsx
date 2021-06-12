@@ -1,39 +1,22 @@
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import React from 'react';
 import { View, StyleSheet, Text, Dimensions } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { Button } from 'react-native-paper';
 import { PRIMARY_COLOR } from '../../common/Constants';
 import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
-import { AppDataRepository } from '../../common/services/AppDataRepository';
 
-interface SwipeToDeleteInfoProps {
-  appDataRepository?: AppDataRepository;
-}
-
-export default function SwipeToDeleteInfo({ appDataRepository = AppDataRepository.getInstance() }: SwipeToDeleteInfoProps) {
+export default function SwipeToDeleteInfo() {
   const { appData, setAppData } = useAppData();
   const styles = getStyles(appData.theme);
 
-  const hide = () => {
-    const newAppData = { ...appData, swipeToDeleteMemoryInfoAlreadyShown: true };
-    setAppData(newAppData);
-    appDataRepository.save(newAppData);
-  };
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={hide} style={styles.touchable}>
-        <View style={styles.hintContainer}>
-          <Entypo name='info-with-circle' style={styles.infoIcon} />
-          <Text style={styles.infoText}>Swipe to the left your note if you want to delete it</Text>
-        </View>
-        <MaterialCommunityIcons name='gesture-swipe-right' size={180} color={new Color('#ddb892', '#b08968').get(appData.theme)} />
-        <Button mode='contained' style={styles.doneIcon}>
-          Hide
-        </Button>
-      </TouchableWithoutFeedback>
+      <View style={styles.hintContainer}>
+        <Entypo name='info-with-circle' style={styles.infoIcon} />
+        <Text style={styles.infoText}>Swipe to the right your note if you want to delete it</Text>
+      </View>
+      <MaterialCommunityIcons name='gesture-swipe-right' size={180} color={new Color('#ddb892', '#b08968').get(appData.theme)} />
     </View>
   );
 }
@@ -44,8 +27,6 @@ function getStyles(theme: Theme) {
       position: 'absolute',
       top: 180,
       width: Dimensions.get('window').width,
-    },
-    touchable: {
       alignItems: 'center',
     },
     hintContainer: {

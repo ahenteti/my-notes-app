@@ -37,7 +37,7 @@ export default function NotesView({ appDataRepository = AppDataRepository.getIns
               return <MemoryView style={{ marginBottom: 10 }} memory={item} handleDelete={() => deleteMemory(index)}></MemoryView>;
             }}
           />
-          {appData.swipeToDeleteMemoryInfoAlreadyShown ? null : <SwipeToDeleteInfo></SwipeToDeleteInfo>}
+          {appData.swipeToDeleteMemoryInfoAlreadyShown || appData.memories.length != 1 ? null : <SwipeToDeleteInfo></SwipeToDeleteInfo>}
 
           <AddNoteFAB onPress={() => navigation.navigate(ADD_NOTE_SCREEN_NAME)}></AddNoteFAB>
         </SafeAreaView>
