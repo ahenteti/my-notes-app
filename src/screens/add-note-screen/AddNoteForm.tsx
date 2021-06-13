@@ -10,6 +10,7 @@ import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
 import { AppDataRepository } from '../../common/services/AppDataRepository';
 import { EncryptionService } from '../../common/services/EncryptionService';
+import { ToastService } from '../../common/services/ToastService';
 
 const CANCEL_BUTTON_BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 const CANCEL_BUTTON_COLOR = new Color('#555', '#EEE');
@@ -17,11 +18,13 @@ const CANCEL_BUTTON_COLOR = new Color('#555', '#EEE');
 interface AddNoteFormProps {
   appDataRepository?: AppDataRepository;
   encryptionService?: EncryptionService;
+  toastService?: ToastService;
 }
 
 export function AddNoteForm({
   appDataRepository = AppDataRepository.getInstance(),
   encryptionService = EncryptionService.getInstance(),
+  toastService = ToastService.getInstance(),
 }: AddNoteFormProps) {
   const navigation = useNavigation();
   const { appData, setAppData } = useAppData();
@@ -39,7 +42,10 @@ export function AddNoteForm({
     memories.unshift({ id, label, value: updatedValue, isEncrypted: encryptValue });
     const newAppData = { ...appData, memories };
     setAppData(newAppData);
-    appDataRepository.save(newAppData);
+    appDataRepository
+      .save(newAppData)
+      .then(() => toastService.show('Your note has been saved successfully'))
+      .catch(() => toastService.show('Error while saving your note :( please try again'));
     navigation.navigate(HOME_SCREEN_NAME);
   };
   return (

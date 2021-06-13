@@ -9,21 +9,35 @@ import SwipeToDeleteInfo from './SwipeToDeleteInfo';
 import { useAppData } from '../../common/services/AppDataReactContext';
 import { AppDataRepository } from '../../common/services/AppDataRepository';
 import SearchInput from './SearchInput';
+import { ToastService } from '../../common/services/ToastService';
 
 interface NotesProps {
   appDataRepository?: AppDataRepository;
+  toastService?: ToastService;
 }
 
-export default function NotesView({ appDataRepository = AppDataRepository.getInstance() }: NotesProps) {
+export default function NotesView({ appDataRepository = AppDataRepository.getInstance(), toastService = ToastService.getInstance() }: NotesProps) {
   const { appData, setAppData } = useAppData();
   const styles = getStyles(appData.theme);
   const navigation = useNavigation();
   const [search, setSearch] = useState('');
   const [filteredMemories, setFilteredMemories] = useState([...appData.memories]);
   useEffect(() => setFilteredMemories([...appData.memories]), [appData]);
+
   const onSearchChange = (text: string) => {
     setSearch(text);
     setFilteredMemories(text ? appData.memories.filter((memory) => memory.label.toLowerCase().includes(text.toLowerCase())) : [...appData.memories]);
+  };
+
+  const deleteMemory = (index: number) => {
+    const memories = [...appData.memories];
+    memories.splice(index, 1);
+    const newAppData = { ...appData, memories, swipeToDeleteMemoryInfoAlreadyShown: true };
+    setAppData(newAppData);
+    appDataRepository
+      .save(newAppData)
+      .then(() => toastService.show('Your note has been deleted successfully'))
+      .catch(() => toastService.show('Error while deleting your note :( please try again'));
   };
 
   return (
@@ -44,14 +58,6 @@ export default function NotesView({ appDataRepository = AppDataRepository.getIns
       )}
     </View>
   );
-
-  function deleteMemory(index: number) {
-    const memories = [...appData.memories];
-    memories.splice(index, 1);
-    const newAppData = { ...appData, memories, swipeToDeleteMemoryInfoAlreadyShown: true };
-    setAppData(newAppData);
-    appDataRepository.save(newAppData);
-  }
 }
 
 const getStyles = (theme: Theme) => {
