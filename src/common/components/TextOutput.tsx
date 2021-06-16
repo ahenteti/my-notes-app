@@ -29,7 +29,9 @@ export default function TextOutput(props: TextOutputProps) {
         </Text>
         <View style={[styles.labelBackground, { width: width }]}></View>
       </View>
-      <Text style={styles.value}>{props.value}</Text>
+      <Text selectable={true} style={styles.value}>
+        {props.value}
+      </Text>
     </View>
   );
 }
