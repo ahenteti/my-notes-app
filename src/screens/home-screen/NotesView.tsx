@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, FlatList, SafeAreaView, View } from 'react-native';
-import MemoryView from './MemoryView';
+import NoteView from './NoteView';
 import { ADD_NOTE_SCREEN_NAME, BODY_BACKGROUND_COLOR } from '../../common/Constants';
 import { Theme } from '../../common/models/Theme';
 import AddNoteFAB from './AddNoteFAB';
@@ -48,7 +48,7 @@ export default function NotesView({ appDataRepository = AppDataRepository.getIns
           <FlatList
             data={filteredMemories}
             renderItem={({ item, index }) => {
-              return <MemoryView style={{ marginBottom: 10 }} memory={item} handleDelete={() => deleteMemory(index)}></MemoryView>;
+              return <NoteView style={{ marginBottom: 10 }} note={item} handleDelete={() => deleteMemory(index)}></NoteView>;
             }}
           />
           {appData.swipeToDeleteMemoryInfoAlreadyShown || appData.memories.length != 1 ? null : <SwipeToDeleteInfo></SwipeToDeleteInfo>}
