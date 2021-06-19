@@ -28,7 +28,7 @@ export default function MandatoryTextInput(props: MandatoryTextInputProps) {
         onFocus={() => setFocused(true)}
       ></TextInput>
       <HelperText type='error' visible={props.value == '' && focused} style={styles.helperText}>
-        {props.label + ' is mandatory'}
+        Required
       </HelperText>
     </View>
   );

@@ -6,20 +6,20 @@ import HomeScreenHeader from './HomeScreenHeader';
 import NotesView from './NotesView';
 import NoNotesView from './NoNotesView';
 import { useAppData } from '../../common/services/AppDataReactContext';
-import { AppDataRepository } from '../../common/services/AppDataRepository';
+import { AppDataService } from '../../common/services/AppDataService';
 
 interface HomeScreenComponentProps {
-  appDataRepository?: AppDataRepository;
+  appDataService?: AppDataService;
 }
 
-function HomeScreenComponent({ appDataRepository = AppDataRepository.getInstance() }: HomeScreenComponentProps) {
+function HomeScreenComponent({ appDataService = AppDataService.getInstance() }: HomeScreenComponentProps) {
   const { appData, setAppData } = useAppData();
 
   const hide = () => {
     if (appData.memories.length != 1) return;
     const newAppData = { ...appData, swipeToDeleteMemoryInfoAlreadyShown: true };
     setAppData(newAppData);
-    appDataRepository.save(newAppData);
+    appDataService.save(newAppData);
   };
 
   return (

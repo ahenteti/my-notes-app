@@ -8,44 +8,27 @@ import { BODY_BACKGROUND_COLOR, HOME_SCREEN_NAME, TEXT_COLOR } from '../../commo
 import { Color } from '../../common/models/Color';
 import { Theme } from '../../common/models/Theme';
 import { useAppData } from '../../common/services/AppDataReactContext';
-import { AppDataRepository } from '../../common/services/AppDataRepository';
-import { EncryptionService } from '../../common/services/EncryptionService';
-import { ToastService } from '../../common/services/ToastService';
+import { AppDataService } from '../../common/services/AppDataService';
 
 const CANCEL_BUTTON_BACKGROUND_COLOR = new Color('#fff', '#262A2D');
 const CANCEL_BUTTON_COLOR = new Color('#555', '#EEE');
 
 interface AddNoteFormProps {
-  appDataRepository?: AppDataRepository;
-  encryptionService?: EncryptionService;
-  toastService?: ToastService;
+  appDataService?: AppDataService;
 }
 
-export function AddNoteForm({
-  appDataRepository = AppDataRepository.getInstance(),
-  encryptionService = EncryptionService.getInstance(),
-  toastService = ToastService.getInstance(),
-}: AddNoteFormProps) {
+export function AddNoteForm({ appDataService = AppDataService.getInstance() }: AddNoteFormProps) {
   const navigation = useNavigation();
   const { appData, setAppData } = useAppData();
   const styles = getStyles(appData.theme);
   const [label, setLabel] = React.useState('');
   const [value, setValue] = React.useState('');
   const [encryptValue, setEncryptValue] = React.useState(false);
-  const [salt, setSalt] = React.useState('');
+  const [encryptionKey, setEncryptionKey] = React.useState('');
   const toggleEncryptValue = () => setEncryptValue(!encryptValue);
-  const saveButtonIsDisabled = () => (encryptValue ? !label || !value || !salt : !label || !value);
-  const handleSaveButtonClickEvent = () => {
-    const memories = [...appData.memories];
-    const id = Date.now() + '';
-    const updatedValue = encryptValue ? encryptionService.encrypt(salt, value) : value;
-    memories.unshift({ id, label, value: updatedValue, isEncrypted: encryptValue });
-    const newAppData = { ...appData, memories };
-    setAppData(newAppData);
-    appDataRepository
-      .save(newAppData)
-      .then(() => toastService.show('Your note has been saved successfully'))
-      .catch(() => toastService.show('Error while saving your note :( please try again'));
+  const isSaveButtonDisabled = () => (encryptValue ? !label || !value || !encryptionKey : !label || !value);
+  const onSaveButtonClickEvent = () => {
+    appDataService.createNote({ label, value, encryptionKey, appData, setAppData });
     navigation.navigate(HOME_SCREEN_NAME);
   };
   return (
@@ -58,10 +41,15 @@ export function AddNoteForm({
           <Switch value={encryptValue} onValueChange={toggleEncryptValue} />
         </View>
         {encryptValue ? (
-          <MandatoryTextInput style={styles.inputContainer} label='Encryption Key' value={salt} onChange={setSalt}></MandatoryTextInput>
+          <MandatoryTextInput
+            style={styles.inputContainer}
+            label='Encryption Key'
+            value={encryptionKey}
+            onChange={setEncryptionKey}
+          ></MandatoryTextInput>
         ) : null}
         <View style={styles.buttonsContainer}>
-          <Button style={styles.saveButton} mode='contained' disabled={saveButtonIsDisabled()} onPress={handleSaveButtonClickEvent}>
+          <Button style={styles.saveButton} mode='contained' disabled={isSaveButtonDisabled()} onPress={onSaveButtonClickEvent}>
             {'  Save  '}
           </Button>
           <Button
@@ -73,6 +61,8 @@ export function AddNoteForm({
             Cancel
           </Button>
         </View>
+        <Text> </Text>
+        <Text> </Text>
       </ScrollView>
     </TouchableWithDismissKeyboardCapability>
   );

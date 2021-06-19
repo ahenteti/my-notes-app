@@ -20,7 +20,7 @@ export default function ConsultNoteScreen(Stack = createStackNavigator()) {
       name={CONSULT_NOTE_SCREEN_NAME}
       component={ConsultNoteScreenComponent}
       options={{
-        headerTitle: () => <SecondaryScreenHeader name='Consult Note'></SecondaryScreenHeader>,
+        headerTitle: () => <SecondaryScreenHeader name={CONSULT_NOTE_SCREEN_NAME}></SecondaryScreenHeader>,
         headerStyle: {
           height: HEADER_HEIGHT,
         },

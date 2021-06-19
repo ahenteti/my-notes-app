@@ -8,16 +8,17 @@ import ConsultNoteScreen from './src/screens/consult-note-screen/ConsultNoteScre
 import { Provider as ThemePaperProvider } from 'react-native-paper';
 import { DefaultAddData } from './src/common/models/AppData';
 import { AppDataReactContext } from './src/common/services/AppDataReactContext';
-import { AppDataRepository } from './src/common/services/AppDataRepository';
+import { AppDataService } from './src/common/services/AppDataService';
 import LoadingScreen from './src/common/components/LoadingScreen';
+import EditNoteScreen from './src/screens/edit-note-screen/EditNoteScreen';
 
 interface AppProps {
-  appDataRepository?: AppDataRepository;
+  appDataService?: AppDataService;
 }
 
 const Stack = createStackNavigator();
 
-export default function App({ appDataRepository = AppDataRepository.getInstance() }: AppProps) {
+export default function App({ appDataService = AppDataService.getInstance() }: AppProps) {
   const [appData, setAppData] = React.useState(DefaultAddData);
   const [loading, setLoading] = React.useState(true);
   const [loadingDate, setLoadingDate] = React.useState(new Date());
@@ -34,6 +35,7 @@ export default function App({ appDataRepository = AppDataRepository.getInstance(
             {HomeScreen(Stack)}
             {AddNoteScreen(Stack)}
             {ConsultNoteScreen(Stack)}
+            {EditNoteScreen(Stack)}
           </Stack.Navigator>
         </NavigationContainer>
       </ThemePaperProvider>
@@ -41,7 +43,7 @@ export default function App({ appDataRepository = AppDataRepository.getInstance(
   );
 
   function loadAppDataFromStorage() {
-    appDataRepository.load().then((res) => {
+    appDataService.load().then((res) => {
       setAppData(res);
       setTimeout(() => {
         setLoading(false);

@@ -20,7 +20,7 @@ export default function AddNoteScreen(Stack = createStackNavigator()) {
       name={ADD_NOTE_SCREEN_NAME}
       component={AddNoteScreenComponent}
       options={{
-        headerTitle: () => <SecondaryScreenHeader name='Add Note'></SecondaryScreenHeader>,
+        headerTitle: () => <SecondaryScreenHeader name={ADD_NOTE_SCREEN_NAME}></SecondaryScreenHeader>,
         headerStyle: {
           height: HEADER_HEIGHT,
         },
