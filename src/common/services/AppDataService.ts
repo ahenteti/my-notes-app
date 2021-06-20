@@ -42,7 +42,7 @@ export class AppDataService {
   }
 
   async updateNote(note: NoteToUpdate): Promise<void> {
-    const updatedValue = note.encryptionKey ? this.encryptionService.encrypt(note.encryptionKey, note.value) : note.value;
+    const updatedValue = note.encryptionKey && note.encryptValue ? this.encryptionService.encrypt(note.encryptionKey, note.value) : note.value;
     const memories = [...note.appData.memories];
     const index = memories.findIndex((n) => note.id === n.id);
     if (index < 0) return;
