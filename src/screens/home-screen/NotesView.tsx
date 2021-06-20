@@ -69,13 +69,14 @@ export default function NotesView({ appDataService = AppDataService.getInstance(
     <View>
       {appData.memories.length == 0 ? null : (
         <SafeAreaView style={styles.container}>
-          <SearchInput text={search} onChangeText={onSearchChange} style={{ marginBottom: 15 }}></SearchInput>
+          <SearchInput text={search} onChangeText={onSearchChange} style={{ margin: 15 }}></SearchInput>
           <View style={{ flex: 1 }}>
             <FlatList
               data={filteredMemories}
               renderItem={({ item, index }) => {
                 return (
                   <Swipeable
+                    containerStyle={{ margin: 15, marginBottom: 0, marginTop: 0 }}
                     ref={(ref) => (notes[index] = ref)}
                     renderLeftActions={() => renderNoteActions(item)}
                     onSwipeableLeftWillOpen={() => closePreviouslyOpenedNote(index)}
@@ -100,7 +101,6 @@ const getStyles = (theme: Theme) => {
     container: {
       backgroundColor: BODY_BACKGROUND_COLOR.get(theme),
       minHeight: '100%',
-      padding: 15,
     },
     leftActionButtonsContainer: {
       display: 'flex',
