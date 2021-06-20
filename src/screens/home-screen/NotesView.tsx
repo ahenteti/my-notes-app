@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, FlatList, SafeAreaView, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, FlatList, SafeAreaView, View, TouchableOpacity, ScrollView } from 'react-native';
 import NoteView from './NoteView';
 import {
   ADD_NOTE_SCREEN_NAME,
@@ -70,20 +70,22 @@ export default function NotesView({ appDataService = AppDataService.getInstance(
       {appData.memories.length == 0 ? null : (
         <SafeAreaView style={styles.container}>
           <SearchInput text={search} onChangeText={onSearchChange} style={{ marginBottom: 15 }}></SearchInput>
-          <FlatList
-            data={filteredMemories}
-            renderItem={({ item, index }) => {
-              return (
-                <Swipeable
-                  ref={(ref) => (notes[index] = ref)}
-                  renderLeftActions={() => renderNoteActions(item)}
-                  onSwipeableLeftWillOpen={() => closePreviouslyOpenedNote(index)}
-                >
-                  <NoteView style={{ marginBottom: 10 }} note={item}></NoteView>
-                </Swipeable>
-              );
-            }}
-          />
+          <View style={{ flex: 1 }}>
+            <FlatList
+              data={filteredMemories}
+              renderItem={({ item, index }) => {
+                return (
+                  <Swipeable
+                    ref={(ref) => (notes[index] = ref)}
+                    renderLeftActions={() => renderNoteActions(item)}
+                    onSwipeableLeftWillOpen={() => closePreviouslyOpenedNote(index)}
+                  >
+                    <NoteView style={{ marginBottom: 10 }} note={item}></NoteView>
+                  </Swipeable>
+                );
+              }}
+            />
+          </View>
           {appData.swipeToDeleteMemoryInfoAlreadyShown || appData.memories.length != 1 ? null : <SwipeToRightInfo></SwipeToRightInfo>}
 
           <AddNoteFAB onPress={() => navigation.navigate(ADD_NOTE_SCREEN_NAME)}></AddNoteFAB>
@@ -99,7 +101,6 @@ const getStyles = (theme: Theme) => {
       backgroundColor: BODY_BACKGROUND_COLOR.get(theme),
       minHeight: '100%',
       padding: 15,
-      paddingBottom: 10,
     },
     leftActionButtonsContainer: {
       display: 'flex',
